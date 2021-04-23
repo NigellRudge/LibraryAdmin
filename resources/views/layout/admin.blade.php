@@ -25,6 +25,7 @@
 @endsection
 
 @section('css')
+    @yield('custom_css')
 @endsection
 
 @section('js')
@@ -32,4 +33,5 @@
     <script src="{{ asset('plugins/jquery-easing/jquery.easing.min.js')}}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js')}}"></script>
+    @yield('custom_js')
 @endsection

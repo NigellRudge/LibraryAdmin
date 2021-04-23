@@ -16,15 +16,15 @@ class CreateBookTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title',80);
-            $table->foreignId('author_id')->constrained('author');
+            $table->foreignId('author_id')->constrained('authors');
             $table->date('publication_date');
             $table->string('isbn',30);
             $table->integer('num_pages');
             $table->text('short_description');
-            $table->decimal('sales_price',2);
-            $table->decimal('purchase_price',2);
+            $table->decimal('sale_price',10,2);
+            $table->decimal('purchase_price',10,2);
             $table->boolean('age_restricted')->default(false);
-            $table->string('cover',80);
+            $table->string('cover',80)->nullable()->default(null);
             $table->timestamps();
         });
     }
@@ -36,6 +36,6 @@ class CreateBookTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book');
+        Schema::dropIfExists('books');
     }
 }

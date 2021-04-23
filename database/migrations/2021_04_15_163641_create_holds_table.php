@@ -16,7 +16,7 @@ class CreateHoldsTable extends Migration
         Schema::create('holds', function (Blueprint $table) {
             $table->id();
             $table->foreignId('library_card_id')->constrained('library_cards');
-            $table->foreignId('book_item_id')->constrained('book_item');
+            $table->foreignId('book_item_id')->constrained('book_items');
             $table->date('date');
             $table->boolean('active')->default(true);
             $table->timestamps();

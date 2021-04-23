@@ -31,6 +31,6 @@ class CreateBookItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_item');
+        Schema::dropIfExists('book_items');
     }
 }

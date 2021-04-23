@@ -1,0 +1,6 @@
+@include('shared.datatable_css')
+@include('shared.selectCss')
+@include('shared.daterange-pickerCSS')
+@include('shared.sweet-alert-css')
+@include('shared.toastrCSS')
+@include('shared.fullcalendar_css')

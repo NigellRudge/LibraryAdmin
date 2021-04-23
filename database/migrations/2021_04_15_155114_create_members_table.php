@@ -17,9 +17,10 @@ class CreateMembersTable extends Migration
             $table->id();
             $table->string('first_name',35);
             $table->string('last_name',35);
-            $table->date('date_of_birth');
+            $table->date('birth_date');
             $table->string('address',35);
-            $table->string('email_address',40);
+            $table->string('email',40);
+            $table->string('phone_number',40);
             $table->foreignId('gender_id')->constrained('genders');
             $table->string('picture',70);
             $table->timestamps();
