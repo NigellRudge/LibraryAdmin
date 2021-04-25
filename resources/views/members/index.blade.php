@@ -6,12 +6,6 @@
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
                     <h4 class="font-weight-bold text-primary pl-2">Members</h4>
-                    <div>
-                        <button class="btn btn-primary rounded-pill py-2  font-weight-bold text-white" onclick="AddMember(event)">
-                            Add Member
-                            <i class="ml-1 fas fa-plus"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
             <div class="card  px-1 pt-1 rounded-lg">
@@ -63,113 +57,118 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Member</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="text-light">&times;</span>
-                    </button>
-                </div>
-                <form method="post" action="#" id="addForm" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body px-3 py-2">
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_first_name" class="text-dark font-weight-bold">First Name <span class="text-danger">*</span></label>
-                                    <input type="text" id="add_first_name" name="first_name" class="form-control">
-                                </div>
-                            </div>
+{{--    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog modal-lg" role="document">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header bg-primary text-light">--}}
+{{--                    <h5 class="modal-title" id="editModalLabel">Add Member</h5>--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                        <span aria-hidden="true" class="text-light">&times;</span>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <form method="post" action="#" id="addForm" enctype="multipart/form-data">--}}
+{{--                    @csrf--}}
+{{--                    <div class="modal-body px-3 py-2">--}}
+{{--                        <div class="form-row">--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="edit_first_name" class="text-dark font-weight-bold">First Name <span class="text-danger">*</span></label>--}}
+{{--                                    <input type="text" id="edit_first_name" name="first_name" class="form-control">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
 
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_last_name" class="text-dark  font-weight-bold">Last Name <span class="text-danger">*</span></label>
-                                    <input type="text" id="add_last_name" name="last_name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_birth_date" class="text-dark  font-weight-bold">Birth Date <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-calendar text-dark"></i>
-                                            </div>
-                                        </div>
-                                        <input type="text" id="add_birth_date" name="birth_date" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="add_gender">Gender <span class="text-danger">*</span></label>
-                                    <select class="form-control" id="add_gender" name="gender_id">
-                                        <option value="0">Select gender</option>
-                                        @foreach($data['genders'] as $gender)
-                                            <option value="{{ $gender->id }}">{{$gender->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_email" class="text-dark font-weight-bold">Email</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <span class="text-dark">@</span>
-                                            </div>
-                                        </div>
-                                        <input type="text" placeholder="name@email.com" id="add_email" name="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_phone_number" class="text-dark font-weight-bold">Phone Number</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fa fa-phone text-dark"></i>
-                                            </div>
-                                        </div>
-                                        <input type="text" placeholder="(+597) 0000000" id="add_phone_number" name="phone_number" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_address" class="text-dark font-weight-bold">Address</label>
-                                    <input type="text" id="add_address" placeholder="street A #12" name="address" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <div class="mb-1 mt-1 text-dark font-weight-bold">Picture</div>
-                                <div class="form-group">
-                                    <div class="custom-file mb-1">
-                                        <input type="file" class="custom-file-input" id="add_picture" name="picture">
-                                        <label class="custom-file-label" for="add_picture">Choose file</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>
-                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="edit_last_name" class="text-dark  font-weight-bold">Last Name <span class="text-danger">*</span></label>--}}
+{{--                                    <input type="text" id="edit_last_name" name="last_name" class="form-control">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="add_birth_date" class="text-dark  font-weight-bold">Birth Date <span class="text-danger">*</span></label>--}}
+{{--                                    <div class="input-group">--}}
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <div class="input-group-text">--}}
+{{--                                                <i class="fa fa-calendar text-dark"></i>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <input type="text" id="add_birth_date" name="birth_date" class="form-control">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-row">--}}
+{{--                            <div class="col-4">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="add_gender">Gender <span class="text-danger">*</span></label>--}}
+{{--                                    <select class="form-control" id="add_gender" name="gender_id">--}}
+{{--                                        <option value="0">Select gender</option>--}}
+{{--                                        @foreach($data['genders'] as $gender)--}}
+{{--                                            <option value="{{ $gender->id }}">{{$gender->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="add_email" class="text-dark font-weight-bold">Email</label>--}}
+{{--                                    <div class="input-group">--}}
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <div class="input-group-text">--}}
+{{--                                                <span class="text-dark">@</span>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <input type="text" placeholder="name@email.com" id="add_email" name="email" class="form-control">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="add_phone_number" class="text-dark font-weight-bold">Phone Number</label>--}}
+{{--                                    <div class="input-group">--}}
+{{--                                        <div class="input-group-prepend">--}}
+{{--                                            <div class="input-group-text">--}}
+{{--                                                <i class="fa fa-phone text-dark"></i>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <input type="text" placeholder="(+597) 0000000" id="add_phone_number" name="phone_number" class="form-control">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-row">--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="add_address" class="text-dark font-weight-bold">Address</label>--}}
+{{--                                    <input type="text" id="add_address" placeholder="street A #12" name="address" class="form-control">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-row">--}}
+{{--                            <div class="col-8">--}}
+{{--                                <div class="mb-1 mt-1 text-dark font-weight-bold">Picture</div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <div class="custom-file mb-1">--}}
+{{--                                        <input type="file" class="custom-file-input" id="add_picture" name="picture">--}}
+{{--                                        <label class="custom-file-label" for="add_picture">Choose file</label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col py-2">--}}
+{{--                                <div class="d-flex justify-content-center align-items-center">--}}
+{{--                                    <img src="{{ asset('storage/placeholder-male.jpg') }}" alt="Member Image" width="70" height="120" style="object-fit: cover">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>--}}
+{{--                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -182,22 +181,23 @@
                 </div>
                 <form method="post" action="#" id="remove_form">
                     @csrf
-                    <input type="hidden" name="book_id" id="remove_book_id">
+                    <input type="hidden" name="member_id" id="remove_member_id">
                     <div class="modal-body">
                         <div class="d-flex flex-row align-baseline">
                             <div class="text-teal mr-2 ml-1" style="font-size: 3.0rem;">
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Book:<br>
-                                <div class="d-inline text-teal font-weight-bold" id="confirm_book"></div> ?
+                                Are you sure you want to remove this Member:<br>
+                                <div class="d-inline text-teal font-weight-bold" id="confirm_member"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-info">Terminate Membership</button>
+                        <button type="submit" class="btn btn-outline-danger">delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
@@ -215,11 +215,11 @@
         const removeModal = $('#removeModal')
         const removeForm = $('#remove_form')
 
-        const addModal = $('#addModal')
-        const addForm = $('#addForm')
+        // const addModal = $('#addModal')
+        // const addForm = $('#addForm')
 
-        const editModal = $('#editModal')
-        const editForm = $('#editForm')
+        // const editModal = $('#editModal')
+        // const editForm = $('#editForm')
         $(document).ready(()=>{
             let genderId = 0;
             const genderFilter = $('#gender_filter');
@@ -264,33 +264,33 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
 
-            addForm.validate({
+            {{--addForm.validate({--}}
 
-            })
-            addForm.submit(function($event){
-                $event.preventDefault()
-                let data = new FormData($(this)[0])
-                console.log(data)
-                $.ajax({
-                    url: '{!! route('members.store') !!}',
-                    headers: {
-                        'X-CSRF-TOKEN': '{!! csrf_token() !!}'
-                    },
-                    method: 'post',
-                    enctype: 'multipart/form-data',
-                    processData: false,  // Important!
-                    contentType: false,
-                    data: data,
-                    complete: (xhr)=>{
-                        if(xhr.status === 201){
-                            const {message} = xhr.responseJSON
-                            toastr.success(message,'Success');
-                            dataTable.ajax.reload()
-                            addModal.modal('hide')
-                        }
-                    }
-                })
-            })
+            {{--})--}}
+            {{--addForm.submit(function($event){--}}
+            {{--    $event.preventDefault()--}}
+            {{--    let data = new FormData($(this)[0])--}}
+            {{--    console.log(data)--}}
+            {{--    $.ajax({--}}
+            {{--        url: '{!! route('members.store') !!}',--}}
+            {{--        headers: {--}}
+            {{--            'X-CSRF-TOKEN': '{!! csrf_token() !!}'--}}
+            {{--        },--}}
+            {{--        method: 'post',--}}
+            {{--        enctype: 'multipart/form-data',--}}
+            {{--        processData: false,  // Important!--}}
+            {{--        contentType: false,--}}
+            {{--        data: data,--}}
+            {{--        complete: (xhr)=>{--}}
+            {{--            if(xhr.status === 201){--}}
+            {{--                const {message} = xhr.responseJSON--}}
+            {{--                toastr.success(message,'Success');--}}
+            {{--                dataTable.ajax.reload()--}}
+            {{--                addModal.modal('hide')--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--})--}}
 
             removeForm.submit(function($event){
                 $event.preventDefault();
@@ -311,32 +311,32 @@
             })
         })
 
-        const AddMember = ($event)=>{
-            $event.preventDefault();
-            console.log('click')
-            addModal.modal('show')
-
-            $('#add_birth_date').daterangepicker({
-                singleDatePicker:true,
-                autoUpdateInput: true,
-                showDropdowns: true,
-                minYear: 1901,
-                drops:'auto'
-            })
-        }
+        // const AddMember = ($event)=>{
+        //     $event.preventDefault();
+        //     console.log('click')
+        //     addModal.modal('show')
+        //
+        //     $('#add_birth_date').daterangepicker({
+        //         singleDatePicker:true,
+        //         autoUpdateInput: true,
+        //         showDropdowns: true,
+        //         minYear: 1901,
+        //         drops:'auto'
+        //     })
+        // }
 
         const DeleteMember = ($event)=>{
             $event.preventDefault();
             let id = $event.target.getAttribute('data-id')
-            let title = $event.target.getAttribute('data-title')
-            $('#confirm_book').html(`${title}`)
-            $('#remove_book_id').val( parseInt(id))
+            let name = $event.target.getAttribute('data-name')
+            $('#confirm_member').html(`${name}`)
+            $('#remove_member_id').val( parseInt(id))
             removeModal.modal('show')
         }
 
-        const EditMember = ($event)=>{
-            $event.preventDefault()
-        }
+        // const EditMember = ($event)=>{
+        //     $event.preventDefault()
+        // }
 
 
     </script>

@@ -22,7 +22,9 @@ class DatabaseSeeder extends Seeder
             ConfigSeeder::class,
             BookItemSeeder::class,
             BookCategorySeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            RelationTypeSeeder::class,
+            MemberSeeder::class
         ]);
     }
 }

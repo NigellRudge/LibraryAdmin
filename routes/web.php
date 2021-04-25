@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MembershipRequestsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::group(['middleware' =>'auth'],function(){
+//Route::group(['middleware' =>'auth'],function(){
     Route::get('/', function () {
         return view('layout.admin');
     });
@@ -63,10 +64,18 @@ Route::group(['middleware' =>'auth'],function(){
         Route::post('/',[MemberController::class,'store'])->name('store');
         Route::patch('/',[MemberController::class,'update'])->name('update');
         Route::delete('/',[MemberController::class,'destroy'])->name('destroy');
+        Route::get('/{member}/edit',[MemberController::class,'edit'])->name('edit');
+        Route::get('/{member}',[MemberController::class,'show'])->name('show');
         Route::get('/',[MemberController::class,'index'])->name('index');
     });
+    Route::group(['prefix' => 'requests','as' =>'requests.'],function(){
+        Route::post('/',[MembershipRequestsController::class,'store'])->name('store');
+        Route::patch('/',[MembershipRequestsController::class,'update'])->name('update');
+        Route::delete('/',[MembershipRequestsController::class,'destroy'])->name('destroy');
+        Route::get('/',[MembershipRequestsController::class,'index'])->name('index');
+    });
 
-});
+//});
 
 
 

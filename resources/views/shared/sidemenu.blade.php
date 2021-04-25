@@ -38,12 +38,16 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLoans" aria-expanded="true" aria-controls="collapseLoans">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers" aria-expanded="true" aria-controls="collapseMembers">
             <i class="fas fa-fw fa-book"></i>
             <span>Members</span>
         </a>
-        <div id="collapseLoans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseMembers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('requests.index') }}">
+                    <i class="fa fa-users mr-1 text-primary"></i>
+                    Membership Requests
+                </a>
                 <a class="collapse-item" href="{{ route('members.index') }}">
                     <i class="fa fa-users mr-1 text-primary"></i>
                     Members
@@ -53,11 +57,11 @@
     </li>
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers" aria-expanded="true" aria-controls="collapseMembers">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLoans" aria-expanded="true" aria-controls="collapseLoans">
             <i class="fas fa-fw fa-book"></i>
             <span>Loans</span>
         </a>
-        <div id="collapseMembers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseLoans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="#">
                     <i class="fa fa-users mr-1 text-primary"></i>
@@ -67,6 +71,24 @@
                 <a class="collapse-item" href="#">
                     <i class="fa fa-bookmark mr-1 text-primary"></i>
                     Holds
+                </a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance" aria-expanded="true" aria-controls="collapseFinance">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Finances</span>
+        </a>
+        <div id="collapseFinance" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="#">
+                    <i class="fa fa-users mr-1 text-primary"></i>
+                    Invoices
+                </a>
+                <a class="collapse-item" href="#">
+                    <i class="fa fa-bookmark mr-1 text-primary"></i>
+                    Payment
                 </a>
             </div>
         </div>

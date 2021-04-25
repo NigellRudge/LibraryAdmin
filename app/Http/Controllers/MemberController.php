@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\services\MemberService;
 use Exception;
 use Illuminate\Http\Request;
@@ -54,7 +55,21 @@ class MemberController extends CommonController
     }
 
     public function store(Request $request){
-
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'birth_date' => 'required',
+            'gender_id' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
+            'picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        $result = $this->memberService->storeMember($data,$request);
+        if($result){
+            return response(['message' => 'Member Stored'],201);
+        }
+        return response(['message' => 'Something went wrong' ],401);
     }
 
     public function update(Request $request){
@@ -62,6 +77,21 @@ class MemberController extends CommonController
     }
 
     public function destroy(Request $request){
+        $data = $request->validate([
+           'member_id' => 'required'
+        ]);
+        $result = $this->memberService->deleteMember($data);
+        if($result){
+            return response(['message' => 'Member Deleted'],201);
+        }
+        return response(['message' => 'Something went wrong' ],401);
+    }
+
+    public function show(Member $member){
+
+    }
+
+    public function edit(Member $member){
 
     }
 

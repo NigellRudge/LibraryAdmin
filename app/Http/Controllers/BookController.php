@@ -21,6 +21,7 @@ class BookController extends CommonController
     private $bookService;
     public function __construct(BookService $service)
     {
+        parent::__construct();
         $this->bookService = $service;
     }
 
@@ -88,7 +89,7 @@ class BookController extends CommonController
             'book_id' => 'required'
         ]);
 
-        $result = $this->bookService->deleteBook($data);
+        $result = $this->bookService->deleteBook($data['member_id']);
         if($result){
             return response(['message' => 'Book deleted'],201);
         }
