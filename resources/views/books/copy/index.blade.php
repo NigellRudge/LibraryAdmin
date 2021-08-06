@@ -7,7 +7,7 @@
                 <div class="col d-flex justify-content-between">
                     <h4 class="font-weight-bold text-primary pl-2 pt-2">Book Copies</h4>
                     <div class="pb-2">
-                        <button class="btn btn-primary rounded-pill py-2  font-weight-bold text-white" onclick="AddBookCopy(event)">
+                        <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddBookCopy(event)" style="border-radius: 10px">
                             Add Book Copy
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
@@ -312,7 +312,7 @@
                     { data: 'uid', name: 'uid'},
                     { data: 'title', name: 'title'},
                     { data: 'condition',name: 'condition'},
-                    { data: 'status',name: 'status'},
+                    { data: 'book_status',name: 'book_status'},
                     { data:'actions', name:'actions', orderable: false, searchable: false}
                 ]
             });
@@ -409,7 +409,6 @@
                     }
                 }
             })
-
             addModal.modal('show')
         }
 

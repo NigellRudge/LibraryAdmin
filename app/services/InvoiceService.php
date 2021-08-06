@@ -4,34 +4,45 @@
 namespace App\services;
 
 
-class InvoiceService
+class MembershipFeeService
 {
-    public function getInvoices(array $filterOptions = null, $memberId = null){
+    /**
+     *
+     * This function generates the invoices for all the active members
+     */
+    public function generateMemberFees(){
 
     }
 
-    public function generateInvoice(array $data){
+    /*
+     *
+     * This function generates the late Fees for all of the overdue loans
+     * this function is run every day at 00:00:00
+     * */
+    public function generateLateFees(){
 
     }
 
-    public function updateInvoice(array $data){
+    /*
+     * get All the information (member , reason and payments for the selected fee)
+     * */
+    public function getFeeInfo(array $data){
 
     }
 
-    public function destroyInvoice(array $data){
+    public function settleFee($feeId, array $data){
 
     }
 
-    public function makePayment(array $data){
+    public function getMemberFees(array $filterOptions){
 
     }
 
-    public function getPayments(array $filterOptions = null, $memberId = null){
+    public function updateFee($feeId, array $data){
 
     }
 
-    public function destroyPayment(array $data){
+    public function deleteFee($feeId){
 
     }
-
 }
