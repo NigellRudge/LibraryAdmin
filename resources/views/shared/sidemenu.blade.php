@@ -14,10 +14,10 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Books</span>
+            <i class="fas fa-fw fa-book {{strtolower($data['category_name']) === 'books' ? 'text-warning': '' }}"></i>
+            <span class="{{strtolower($data['category_name']) === 'books' ? 'font-weight-bold text-white': '' }}">Books</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse {{strtolower($data['category_name']) === 'books' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('books.index') }}">
                     <i class="fa fa-book mr-1 text-primary"></i>
@@ -27,10 +27,6 @@
                     <i class="fa fa-book mr-1 text-primary"></i>
                     Book Copies
                 </a>
-                <a class="collapse-item" href="{{ route('authors.index') }}">
-                    <i class="fa fa-user-tie mr-1 text-primary"></i>
-                    Authors
-                </a>
             </div>
         </div>
     </li>
@@ -39,14 +35,14 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMembers" aria-expanded="true" aria-controls="collapseMembers">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Members</span>
+            <i class="fas fa-fw fa-book {{strtolower($data['category_name']) === 'members' ? 'text-warning': '' }}"></i>
+            <span class="{{strtolower($data['category_name']) === 'members' ? 'font-weight-bold text-white': '' }}">Members</span>
         </a>
-        <div id="collapseMembers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseMembers" class="collapse {{strtolower($data['category_name']) === 'members' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('requests.index') }}">
                     <i class="fa fa-users mr-1 text-primary"></i>
-                    Membership Requests
+                    Applications
                 </a>
                 <a class="collapse-item" href="{{ route('members.index') }}">
                     <i class="fa fa-users mr-1 text-primary"></i>
@@ -58,12 +54,12 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLoans" aria-expanded="true" aria-controls="collapseLoans">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Loans</span>
+            <i class="fas fa-fw fa-book {{strtolower($data['category_name']) === 'loans' ? 'text-warning': '' }}"></i>
+            <span class="{{strtolower($data['category_name']) === 'loans' ? 'font-weight-bold text-white': '' }}">Loans</span>
         </a>
-        <div id="collapseLoans" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseLoans" class="collapse {{strtolower($data['category_name']) === 'loans' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">
+                <a class="collapse-item" href="{{ route('loans.index') }}">
                     <i class="fa fa-users mr-1 text-primary"></i>
                     Loans
                 </a>
@@ -77,17 +73,17 @@
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance" aria-expanded="true" aria-controls="collapseFinance">
-            <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Finances</span>
+            <i class="fas fa-fw fa-dollar-sign {{strtolower($data['category_name']) === 'finance' ? 'text-warning': '' }}"></i>
+            <span class="{{strtolower($data['category_name']) === 'finance' ? 'font-weight-bold text-white': '' }}">Finances</span>
         </a>
-        <div id="collapseFinance" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseFinance" class="collapse {{strtolower($data['category_name']) === 'finance' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">
-                    <i class="fa fa-users mr-1 text-primary"></i>
+                <a class="collapse-item" href="{{ route('invoices.index') }}">
+                    <i class="fa fa-file-invoice-dollar mr-1 text-primary"></i>
                     Invoices
                 </a>
-                <a class="collapse-item" href="#">
-                    <i class="fa fa-bookmark mr-1 text-primary"></i>
+                <a class="collapse-item" href="{{ route('payments.index') }}">
+                    <i class="fa fa-hand-holding-usd mr-1 text-primary"></i>
                     Payment
                 </a>
             </div>
@@ -96,14 +92,18 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConfig" aria-expanded="true" aria-controls="collapseConfig">
-            <i class="fas fa-fw fa-cogs"></i>
-            <span>Config</span>
+            <i class="fas fa-fw fa-cogs {{strtolower($data['category_name']) === 'config' ? 'text-warning': '' }}"></i>
+            <span class="{{strtolower($data['category_name']) === 'config' ? 'font-weight-bold text-white': '' }}">Config</span>
         </a>
-        <div id="collapseConfig" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseConfig" class="collapse {{strtolower($data['category_name']) === 'config' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('category.index') }}">
                     <i class="fa fa-address-book mr-1 text-primary"></i>
                     Categories
+                </a>
+                <a class="collapse-item" href="{{ route('authors.index') }}">
+                    <i class="fa fa-user-tie mr-1 text-primary"></i>
+                    Authors
                 </a>
             </div>
         </div>

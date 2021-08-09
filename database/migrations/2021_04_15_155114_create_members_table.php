@@ -24,6 +24,7 @@ class CreateMembersTable extends Migration
             $table->foreignId('gender_id')->constrained('genders');
             $table->unsignedBigInteger('main_member_id')->nullable()->default(null);
             $table->boolean('is_candidate_member')->default(true);
+            $table->foreignId('status_id')->default(3)->constrained('status');
             $table->string('picture',70);
             $table->timestamps();
         });

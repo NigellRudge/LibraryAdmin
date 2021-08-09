@@ -9,6 +9,13 @@ use Yajra\DataTables\DataTables;
 
 class CategoryController extends CommonController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->data['category_name'] = 'Config';
+    }
+
+
     public function Index(Request $request){
         if($request->ajax()){
             $categories = DB::table('category_info')->select('id','name','code','num_books');
@@ -85,7 +92,7 @@ class CategoryController extends CommonController
         if(isset($bookId)){
             $items = DB::table('book_category_info')
                         ->where('book_id','=',$bookId)
-                        ->select('id', DB::raw("name as 'text'"));
+                        ->select(DB::raw("category_id as 'id'"), DB::raw("category as 'text'"));
             $totalItems = $items->count();
             if(isset($page)){
                 $items->offset($offset)->take($count);

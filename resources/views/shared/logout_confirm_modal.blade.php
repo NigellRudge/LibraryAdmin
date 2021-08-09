@@ -7,7 +7,7 @@
                     <span aria-hidden="true" class="text-light">&times;</span>
                 </button>
             </div>
-            <form method="post" action="{{ route('logout') }}" id="remove_form">
+            <form method="post" action="{{ route('logout') }}" id="logout_from">
                 @csrf
                 <div class="modal-body">
                     <div class="d-flex flex-row align-baseline">

@@ -17,9 +17,8 @@ class CreatePricingTable extends Migration
             $table->id();
             $table->string('name',35);
             $table->foreignId('membership_type_id')->constrained('membership_types')->cascadeOnDelete();
+            $table->decimal('amount_per_day',12,2)->default(2.50);
             $table->decimal('amount',12,2);
-            $table->date('start_date');
-            $table->date('end_date')->nullable()->default(null);
             $table->timestamps();
         });
     }

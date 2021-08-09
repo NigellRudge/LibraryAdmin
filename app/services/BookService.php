@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Integer;
 
 class BookService
 {
@@ -52,7 +53,7 @@ class BookService
         return $book->delete();
     }
 
-    public function updateBook(array $data){
+    public function updateBook($bookId,array $data){
 
     }
 
@@ -63,6 +64,9 @@ class BookService
         }
         if(isset($filterOptions['status']) && $filterOptions['status'] != 0){
             $items->where('status_id','=',$filterOptions['status']);
+        }
+        if(isset($filterOptions['bookId']) && $filterOptions['bookId'] != 0){
+            $items->where('book_id','=',$filterOptions['bookId']);
         }
         return $items->get();
     }
@@ -82,5 +86,13 @@ class BookService
         $bookCopy =  BookItem::findOrFail($copyId);
         $result = $bookCopy->update($data);
         return $result;
+    }
+
+    public function getCategories(Integer $bookId = null){
+        if(isset($bookId)){
+            $categories = DB::table('book_categories')->where('book_id','=',$bookId)->select('id','name')->get();
+            return $categories;
+        }
+        return DB::table('categories')->select('id','name')->get();
     }
 }

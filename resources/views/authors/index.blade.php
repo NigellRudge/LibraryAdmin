@@ -7,7 +7,7 @@
                 <div class="col d-flex justify-content-between py-2">
                         <h4 class="font-weight-bold text-primary pl-2">Authors</h4>
                     <div>
-                        <button class="btn btn-primary rounded-pill py-2  font-weight-bold text-white" onclick="AddAuthor(event)">
+                        <button class="btn btn-primary py-2  font-weight-bold text-white" onclick="AddAuthor(event)" style="border-radius: 10px">
                             Add Author
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table table-bordered" style="width: 100%">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>

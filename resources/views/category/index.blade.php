@@ -7,7 +7,7 @@
                 <div class="col d-flex justify-content-between py-2">
                     <h4 class="font-weight-bold text-primary pl-2">Categories</h4>
                     <div>
-                        <button class="btn btn-primary rounded-pill py-2  font-weight-bold text-white" onclick="AddCategory(event)">
+                        <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddCategory(event)" style="border-radius: 10px">
                             Add Category
                             <i class="ml-1 fas fa-plus"></i>
                         </button>

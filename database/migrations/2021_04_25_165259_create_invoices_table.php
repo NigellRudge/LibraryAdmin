@@ -16,8 +16,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
-            $table->foreignId('pricing_id')->constrained('pricing');
-            $table->foreignId('status_id')->constrained('status');
+            $table->foreignId('status_id')->constrained('status')->cascadeOnDelete();
             $table->date('invoice_date');
             $table->decimal('total_amount',12,2);
             $table->decimal('open_amount',12,2);

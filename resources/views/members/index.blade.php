@@ -18,7 +18,22 @@
                                     <select type="text" id="gender_filter" name="gender_id" class="form-control">
                                         <option value="0">All</option>
                                         @foreach($data['genders'] as $gender)
-                                            <option value="{{ $gender->id }}">{{ $gender->name }}</option>
+                                            <option value="{{ $gender->id }}">
+                                                {{ $gender->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                            <div class="form-group row">
+                                <label for="status_filter" class="col-form-label font-weight-bold">Filter By Status</label>
+                                <div class="col">
+                                    <select type="text" id="status_filter" name="status_id" class="form-control">
+                                        <option value="0">All</option>
+                                        @foreach($data['statuses'] as $status)
+                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -39,10 +54,11 @@
                         <table id="datatable" class="table table-bordered table-hover display compact nowrap">
                             <thead>
                             <tr class="text-dark">
-                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>Age</th>
+                                <th>Status</th>
+                                <th>Package</th>
                                 <th>Email</th>
                                 <th>PhoneNumber</th>
                                 <th></th>
@@ -222,7 +238,9 @@
         // const editForm = $('#editForm')
         $(document).ready(()=>{
             let genderId = 0;
+            let statusId = 0;
             const genderFilter = $('#gender_filter');
+            const statusFilter = $('#status_filter');
             const filterBtn = $('#filterBtn')
             const clearBtn = $('#clearBtn')
             const dataTable = $("#datatable").DataTable({
@@ -234,13 +252,16 @@
                     url: '{!! route('members.index') !!}',
                     data: function(d){
                         d.gender = genderId;
+                        d.status = statusId
                     }
                 },
                 columns: [
-                    { data: 'id', name: 'id' },
+                    // { data: 'id', name: 'id' },
                     { data: 'name', name: 'name'},
                     { data: 'gender', name: 'gender'},
                     { data: 'age',name: 'age'},
+                    { data: 'membership_status',name: 'membership_status'},
+                    { data: 'member_type',name: 'member_type'},
                     { data: 'email',name: 'email'},
                     { data: 'phone_number',name: 'phone_number'},
                     { data:'actions', name:'actions', orderable: false, searchable: false}
@@ -251,12 +272,17 @@
                 console.log(this.value)
                 genderId = this.value
             });
+            statusFilter.on('change',function($event){
+                console.log(this.value)
+                statusId = this.value
+            });
             filterBtn.on('click',function($event){
                 console.log('clicked')
                 dataTable.ajax.reload()
             })
             clearBtn.on('click',function($event){
                 genderId = 0
+                statusId = 0
                 dataTable.ajax.reload()
             })
             $(".custom-file-input").on("change", function() {

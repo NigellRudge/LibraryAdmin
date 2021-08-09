@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\DateCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,5 +15,8 @@ class Book extends Model
 {
     protected $table = 'books';
     protected $guarded = [];
+    protected $casts = [
+      'publication_date' => DateCast::class
+    ];
     use HasFactory;
 }

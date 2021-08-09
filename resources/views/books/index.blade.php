@@ -7,10 +7,10 @@
                 <div class="col d-flex justify-content-between py-2">
                     <h4 class="font-weight-bold text-primary pl-2">Books</h4>
                     <div>
-                        <button class="btn btn-primary rounded-pill py-2  font-weight-bold text-white" onclick="AddBook(event)">
+                        <a class="btn btn-primary py-2  font-weight-bold text-white" href="{{ route('books.create') }}"  style="border-radius: 10px">
                             Add Book
                             <i class="ml-1 fas fa-plus"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -188,6 +188,131 @@
         </div>
     </div>
 
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title" id="editModalLabel">Edit Book</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="#" id="editForm" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body px-3 py-2">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_title" class="text-dark font-weight-bold">Title <span class="text-danger">*</span></label>
+                                    <input type="text" id="edit_title" name="title" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_isbn" class="text-dark  font-weight-bold">ISBN <span class="text-danger">*</span></label>
+                                    <input type="text" id="edit_isbn" name="isbn" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_author" class="text-dark font-weight-bold">Author<span class="text-danger">*</span></label>
+                                    <select type="text" id="edit_author" name="author_id" class="form-control"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_pub_date" class="text-dark  font-weight-bold">Publication Date <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar text-dark"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text" id="edit_pub_date" name="publication_date" class="form-control">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_num_pages" class="text-dark font-weight-bold">Number of Pages</label>
+                                    <input type="number" id="edit_num_pages" placeholder="100" name="num_pages" step="1.0" min="1" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="edit_sale_price" class="text-dark font-weight-bold">Sale price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-dollar-sign text-dark"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" step="0.05" min="0.00" placeholder="0.00" id="edit_sale_price" name="sale_price" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="edit_purchase_price" class="text-dark font-weight-bold">Purchase Price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-dollar-sign text-dark"></i>
+                                            </div>
+                                        </div>
+                                        <input type="number" step="0.05" min="0.00" placeholder="0.00" id="edit_purchase_price" name="purchase_price" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="mb-1 mt-1 text-dark font-weight-bold">Cover Image</div>
+                                <div class="form-group">
+                                    <div class="custom-file mb-1">
+                                        <input type="file" class="custom-file-input" id="edit_cover" name="cover">
+                                        <label class="custom-file-label" for="edit_cover">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="edit_categories">Categories</label>
+                                    <select name="categories[]" id="edit_categories" multiple class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <label for="edit_age_restricted">Age restricted <span class="text-danger">*</span></label>
+                                    <select class="form-control" id="edit_age_restricted" name="age_restricted">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="edit_description" class="text-dark  text-dark font-weight-bold">Short description</label>
+                                <textarea rows="5" id="edit_description" name="short_description" placeholder="a long time ago in a galaxy far far away" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>
+                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -338,6 +463,7 @@
 
             categories.select2({
                 theme: 'classic',
+                placeholder: 'Select categories',
                 ajax: {
                     url: '{!! route('category.list') !!}',
                     type: 'post',
@@ -368,6 +494,7 @@
 
             author.select2({
                 theme: 'bootstrap4',
+                placeholder:'Select author',
                 ajax: {
                     url: '{!! route('authors.list') !!}',
                     type: 'post',
@@ -416,6 +543,33 @@
 
         const EditBook = ($event)=>{
             $event.preventDefault()
+            let id = $event.target.getAttribute('data-id')
+            const title = $('#edit_title')
+            const author = $('#edit_author')
+            const isbn = $('#edit_isbn')
+            const pubDate = $('#edit_pub_date')
+            const num_pages = $('#edit_num_pages')
+            const salePrice = $('#edit_sale_price')
+            const purchasePrice = $('#edit_purchase_price')
+            const cover = $('#edit_cover')
+            const categories = $('#edit_categories')
+            const desciption = $('#edit_description')
+            const age = $('#edit_age_restricted')
+            $.ajax({
+                url: '{!! route('books.getById') !!}',
+                method: 'post',
+                data: {
+                    _token: '{!! csrf_token() !!}',
+                    book_id: id
+                },
+                complete: (xhr)=>{
+                    if(xhr.status === 201){
+                        const {book,categories} = xhr.responseJSON;
+                        console.log(book)
+                        console.log(categories)
+                    }
+                }
+            })
         }
 
         const previewImage = (event)=>{
@@ -427,6 +581,14 @@
                 output.src = reader.result;
             }
             reader.readAsDataURL(event.target.files[0]);
+        }
+
+        const setupEditAuthor = (authorId) =>{
+
+        }
+
+        const setupEditCategories = (categories) =>{
+
         }
     </script>
 @endsection

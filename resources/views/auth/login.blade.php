@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('body')
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper" class="d-flex flex-column bg-primary">
         <div id="content">
             <div class="container-fluid">
                 <div class="row d-flex align-items-center" style="min-height: 100vh">
@@ -11,10 +11,10 @@
                                 <i class="fas fa-book-reader text-primary mr-2 " style="font-size: 2.5rem;"></i>
                             </div>
 
-                            <h3 class="font-weight-bolder pt-2 text-dark">Library Admin</h3>
+                            <h3 class="font-weight-bolder pt-2 text-light">Library Admin</h3>
                         </div>
                         <div class="card rounded shadow-sm">
-                            <div class="card-header">
+                            <div class="card-header bg-white border-bottom-0">
                                 <div class="text-center">
                                     <h4 class=" font-weight-bold text-dark" >Login</h4>
                                 </div>
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-footer">
+                                <div class="card-footer bg-white border-top-0">
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-xl-3 col-md-4 col-sm-6">
                                             <button type="submit" class="btn btn-block btn-primary font-weight-bold text-light">Login</button>

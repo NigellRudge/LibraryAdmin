@@ -16,17 +16,25 @@ class ConfigSeeder extends Seeder
     public function run()
     {
         DB::table('status')->insert([
-           ['name' => 'Available','code'=>'A','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-           ['name' => 'Out on Loan','code'=>'L','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-           ['name' => 'Pending','code'=>'PEN','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-           ['name' => 'Approved','code'=>'APRVD','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-           ['name' => 'Rejected','code'=>'RJTD','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-           ['name' => 'Paid','code'=>'PAID','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
+           ['name' => 'Available','code'=>'A'],
+           ['name' => 'Out on Loan','code'=>'L'],
+           ['name' => 'Pending','code'=>'PEN'],
+           ['name' => 'Approved','code'=>'APRVD'],
+           ['name' => 'Rejected','code'=>'RJTD'],
+           ['name' => 'Paid','code'=>'PAID'],
+           ['name' => 'Active','code'=>'ACT'],
+           ['name' => 'In-Active','code'=>'IACT'],
+        ]);
+        DB::table('loan_status')->insert([
+           ['name' => 'Available'],
+           ['name' => 'On Loan'],
+           ['name' => 'Overdue'],
+           ['name' => 'Returned'],
         ]);
         DB::table('condition')->insert([
-            ['name' => 'New','code'=>'N','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-            ['name' => 'Good condition','code'=>'GC','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
-            ['name' => 'Damaged','code'=>'D','created_at' => Carbon::now()->toDateTimeString(),'updated_at' => Carbon::now()->toDateTimeString()],
+            ['name' => 'New','code'=>'N'],
+            ['name' => 'Good condition','code'=>'GC'],
+            ['name' => 'Damaged','code'=>'D'],
         ]);
 
         DB::table('membership_types')->insert([
@@ -35,8 +43,18 @@ class ConfigSeeder extends Seeder
         ]);
 
         DB::table('pricing')->insert([
-            [ 'name' =>'single pricing', 'membership_type_id'=>1,'amount'=>150,'start_date'=> Carbon::now()->toDateTimeString(), 'end_date'=>null, 'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()],
-            [ 'name' =>'family pricing', 'membership_type_id'=>2,'amount'=>350,'start_date'=> Carbon::now()->toDateTimeString(), 'end_date'=>null, 'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()]
+            [ 'name' =>'single pricing', 'membership_type_id'=>1,'amount'=>150,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()],
+            [ 'name' =>'family pricing', 'membership_type_id'=>2,'amount'=>350,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()]
+        ]);
+
+        DB::table('actions')->insert([
+            [ 'name' =>'Approve'],
+            [ 'name' =>'Reject'],
+        ]);
+        DB::table('invoice_types')->insert([
+            [ 'name' =>'Membership Fee'],
+            [ 'name' =>'Late fee'],
+            [ 'name' =>'Damage fee'],
         ]);
     }
 }

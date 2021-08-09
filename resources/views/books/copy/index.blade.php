@@ -93,8 +93,8 @@
                                     <label for="add_uid" class="font-weight-bold">UUID <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="fas fa-qrcode text-dark"></i>
+                                            <div class="input-group-text bg-white">
+                                                <i class="fas fa-qrcode text-primary"></i>
                                             </div>
                                         </div>
                                         <input type="text" id="add_uid" name="uid" class="form-control">
@@ -147,6 +147,69 @@
                         <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title" id="detailsModal">Book copy details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="text-light">&times;</span>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-2">
+                                <div class="font-weight-bold text-secondary mr-2">Book Title: </div>
+                                <span id="copy_title"></span>
+                            </div>
+                            <div class="mb-2">
+                                <div class="font-weight-bold text-secondary mr-2">BarCode: </div>
+                                <span id="copy_barcode"></span>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="mb-2">
+                                <div class="font-weight-bold text-secondary mr-2">Status: </div>
+                                <span id="copy_status"></span>
+                            </div>
+                            <div class="mb-2">
+                                <div class="font-weight-bold text-secondary mr-2">Author: </div>
+                                <span id="copy_author"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-2">
+                                <div class="font-weight-bold text-secondary mr-2">Condition: </div>
+                                <span id="copy_condition"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="fix-topbar">
+                                <h4 class="font-weight-bold text-dark">Loans</h4>
+                                <table id="loan_table" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr class="text-dark">
+                                        <th>Id</th>
+                                        <th>Member</th>
+                                        <th>Period</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -264,16 +327,6 @@
 
 @section('custom_css')
     @include('shared.totalCSS')
-    <style>
-        table.dataTable thead {
-            background-color:var(--primary);
-
-        }
-        table.dataTable thead tr th {
-            color:var(--light);
-            font-size: 0.9rem;
-        }
-    </style>
 @endsection
 
 @section('custom_js')
@@ -287,6 +340,8 @@
 
         const editModal = $('#editModal')
         const editForm = $('#editForm')
+
+        const detailsModal = $('#detailsModal')
 
         $(document).ready(()=>{
             let conditionId = 0;
@@ -373,6 +428,31 @@
                     }
                 })
             })
+
+            editForm.validate({})
+            editForm.submit(function(event){
+                event.preventDefault()
+                let data = $(this).serialize()
+                console.log(data)
+                $.ajax({
+                    url:'{!! route('books.copies.update') !!}',
+                    method:'patch',
+                    data:data,
+                    complete: function(xhr){
+                        if(xhr.status === 201){
+                            const {message} = xhr.responseJSON
+                            toastr.success(message,'Success');
+                            dataTable.ajax.reload()
+                            editModal.modal('hide')
+                        }
+                    }
+                })
+            })
+
+            $(".modal").on("hidden.bs.modal", function() {
+                clearAddForm()
+                clearDetailModal()
+            });
         })
 
         const AddBookCopy = ($event)=>{
@@ -382,6 +462,7 @@
             const status = $('#add_status')
             book.select2({
                 theme: 'bootstrap4',
+                placeholder: 'Select a book',
                 ajax: {
                     url: '{!! route('books.list') !!}',
                     type: 'post',
@@ -430,7 +511,7 @@
             const statusId = $('#edit_status')
             const uid = $('#edit_uid')
             const forSale = $('#edit_for_sale')
-
+            const copyId = $('#edit_copy_id')
             $.ajax({
                 url: '{!! route('books.copies.getById') !!}',
                 method: 'post',
@@ -442,6 +523,7 @@
                     if(xhr.status === 201){
                         const {book} = xhr.responseJSON
                         console.log(book)
+                        copyId.val(id)
                         conditionId.val(book.condition_id)
                         statusId.val(book.status_id)
                         uid.val(book.uid)
@@ -502,6 +584,111 @@
                 });
                 editModal.modal('show')
             });
+        }
+
+        const viewDetails = ($event) =>{
+            $event.preventDefault()
+            const title = $('#copy_title')
+            const author = $('#copy_author')
+            const barcode = $('#copy_barcode')
+            const status = $('#copy_status')
+            const condition = $('#copy_condition')
+            const datatable = $('#loan_table')
+            const id = $event.target.getAttribute('data-id')
+
+            $.ajax({
+                url: '{!! route('books.copies.getById') !!}',
+                method: 'post',
+                data:{
+                    copy_id: id,
+                    _token: '{!! csrf_token() !!}'
+                },
+                complete: function(xhr){
+                    if(xhr.status === 201){
+                        const {book} = xhr.responseJSON
+                        console.log(book)
+                        title.html(`${book.title}`)
+                        barcode.html(`${book.uid}`)
+                        status.html(`${book.status}`)
+                        author.html(`${book.author}`)
+                        condition.html(`${book.condition}`)
+                        datatable.DataTable({
+                            processing: true,
+                            serverSide: true,
+                            autoWidth: false,
+                            lengthMenu: [5,10, 15 ],
+                            pageLength:5,
+                            initComplete: ()=>{
+                              console.log('complete dude')
+                                detailsModal.modal('show')
+                            },
+                            ajax: {
+                                url: '{!! route('books.copies.getLoanList') !!}',
+                                method:'get',
+                                data:{
+                                    copy_id:id
+                                }
+                            },
+                            columns: [
+                                { data: 'id', name: 'id' },
+                                { data: 'member', name: 'member'},
+                                { data: 'loan_date',name: 'loan_date'},
+                                { data: 'status', name: 'status'},
+                            ]
+                        });
+
+                    }
+                }
+            })
+
+        }
+
+        const clearAddForm = ()=>{
+            let barcode = $('#add_uid')
+            barcode.val('')
+            barcode.removeClass('is-valid')
+            barcode.removeClass('is-invalid')
+
+            let book = $('#add_book')
+            book.val('')
+            book.removeClass('is-valid')
+            book.removeClass('is-invalid')
+
+            let condition = $('#add_condition')
+            condition.val(0)
+            condition.removeClass('is-valid')
+            condition.removeClass('is-invalid')
+
+            let status = $('#add_status')
+            status.val(0)
+            status.removeClass('is-valid')
+            status.removeClass('is-invalid')
+
+            let forSale = $('#add_for_sale')
+            forSale.val(1)
+            forSale.removeClass('is-valid')
+            forSale.removeClass('is-invalid')
+        }
+
+        const clearEditForm = () =>{
+
+        }
+
+        const clearDetailModal = ()=>{
+            const title = $('#copy_title')
+            const author = $('#copy_author')
+            const barcode = $('#copy_barcode')
+            const status = $('#copy_status')
+            const condition = $('#copy_condition')
+            const datatable = $('#loan_table')
+
+            datatable.DataTable().clear()
+            datatable.DataTable().destroy()
+            title.html(``)
+            barcode.html(``)
+            status.html(``)
+            author.html(``)
+            condition.html(``)
         }
 
     </script>

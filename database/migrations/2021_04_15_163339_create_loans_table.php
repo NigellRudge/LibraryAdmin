@@ -15,7 +15,7 @@ class CreateLoansTable extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('library_card_id')->constrained('library_cards');
+            $table->foreignId('member_id')->constrained('members');
             $table->foreignId('book_item_id')->constrained('book_items');
             $table->date('loan_date');
             $table->date('expected_date');

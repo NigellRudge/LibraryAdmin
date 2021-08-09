@@ -18,6 +18,7 @@ class AuthorController extends CommonController
     private $authorService;
     public function __construct(AuthorService $service)
     {
+        parent::__construct();
         $this->authorService = $service;
     }
 
@@ -32,25 +33,29 @@ class AuthorController extends CommonController
                 ->addColumn('actions', function ($row){
                     $canDelete = DB::table('books')->where('author_id','=',$row->id)->count() > 0;
                     if($canDelete){
-                        return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
-                                <i class='fa fa-eye'></i>
-                            </a>"
-                            ."<a class='btn-success btn btn-sm rounded text-white text-sm  font-weight-bold mr-1' href='#' onclick='EditAuthor(event)'
-                                   data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'>
-                                <i class='fa fa-edit' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
-                             </a>";
+                        return " <div class='d-flex flex-row justify-content-end'>"
+                                ."<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
+                                    <i class='fa fa-eye'></i>
+                                </a>"
+                                ."<a class='btn-success btn btn-sm rounded text-white text-sm  font-weight-bold mr-1' href='#' onclick='EditAuthor(event)'
+                                       data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'>
+                                    <i class='fa fa-edit' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
+                                 </a>"
+                             ."</div>";
                     }
-                    return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
+                    return "<div class='d-flex flex-row justify-content-end'>"
+                            ."<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
                                 <i class='fa fa-eye'></i>
                             </a>"
-                        ."<a class='btn-success btn btn-sm rounded text-white text-sm  font-weight-bold mr-1 ' href='#' onclick='EditAuthor(event)'
-                              data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'>
-                                <i class='fa fa-edit' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
-                             </a>"
-                        ."<a class='btn btn-danger btn-sm rounded text-white font-weight-bold' href='#' onclick='DeleteAuthor(event)'
-                               data-name='$row->name' data-id='$row->id' data-gender='$row->gender_id'>
-                                <i class='fa fa-trash' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
-                             </a>";
+                            ."<a class='btn-success btn btn-sm rounded text-white text-sm  font-weight-bold mr-1 ' href='#' onclick='EditAuthor(event)'
+                                  data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'>
+                                    <i class='fa fa-edit' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
+                                 </a>"
+                            ."<a class='btn btn-danger btn-sm rounded text-white font-weight-bold' href='#' onclick='DeleteAuthor(event)'
+                                   data-name='$row->name' data-id='$row->id' data-gender='$row->gender_id'>
+                                    <i class='fa fa-trash' data-id='$row->id' data-name='$row->name' data-gender='$row->gender_id'></i>
+                                 </a>"
+                        ."</div>";
 
                 })
                 ->rawColumns(['actions'])
@@ -107,8 +112,19 @@ class AuthorController extends CommonController
     public function getAuthors(Request $request){
         $term = $request['term'];
         $page = $request['page'];
+        $authorId = $request['authorId'] ?? null;
         $take = 10;
         $offSet = ($page - 1) * $take;
+
+        if(isset($authorId)){
+            $author = DB::table('author_books')
+                ->where('id','=',$authorId)
+                ->select('id', DB::raw("author as 'text'"))->get();
+            return response()->json([
+                'results' => $author,
+                'total_item' =>1
+            ]);
+        }
 
         $results = DB::table('authors')->where('name','like',"%$term%")->select('id',DB::raw('name as text'));
         $count = $results->count();

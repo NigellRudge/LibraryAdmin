@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static create(array $array)
- * @method static findOrFail($paymentId)
+ * @method static findOrFail($id)
  */
-class Payment extends Model
+class PaymentInfo extends Model
 {
-    protected $table = 'payments';
-    protected $guarded = [];
+    protected $table = 'payment_info';
     protected $casts = [
         'payment_date' => DateCast::class,
     ];
