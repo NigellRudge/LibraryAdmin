@@ -4,7 +4,7 @@
     <div class="row d-flex flex-row justify-content-center">
         <div class="col-10 flex-column">
             <div class="d-flex">
-                <h5 class="font-weight-bold">Edit Member</h5>
+                <h5 class="font-weight-bold">{{trans('common.edit_member_label')}}</h5>
             </div>
             <div class="card">
                 <form action="{{ route('members.update',['member' => $data['member']]) }}" method="post" enctype="multipart/form-data">
@@ -14,19 +14,19 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="first_name">First Name</label>
+                                    <label for="first_name">{{trans('common.first_name_label')}}</label>
                                     <input type="text" id="first_name" name="first_name" value="{{$data['member']['first_name']}}" placeholder="John etc." class="form-control">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="last_name">Last Name</label>
+                                    <label for="last_name">{{trans('common.last_name_label')}}</label>
                                     <input type="text" id="last_name" placeholder="Smith etc." value="{{$data['member']['last_name']}}"  class="form-control" name="last_name">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="birth_date">Birth Date</label>
+                                    <label for="birth_date">{{trans('common.birth_date')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-primary">
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="gender_id">Gender</label>
+                                    <label for="gender_id">{{trans('common.gender_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-primary">
@@ -58,7 +58,7 @@
                         <div class="form-row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="address">Address</label>
+                                    <label for="address">{{trans('common.address_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-primary">
@@ -71,7 +71,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="phone_number">Phone number</label>
+                                    <label for="phone_number">{{trans('common.phone_number_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-primary">
@@ -84,7 +84,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">{{trans('common.email_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-primary">
@@ -98,7 +98,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col-8">
-                                <div class="mb-1 mt-1 text-dark font-weight-bold">Picture</div>
+                                <div class="mb-1 mt-1 text-dark font-weight-bold">{{trans('common.picture_label')}}</div>
                                 <div class="form-group">
                                     <div class="custom-file mb-1">
                                         <input type="file" class="custom-file-input" value="{{ $data['member']->picture }}" id="picture" name="picture">
@@ -117,11 +117,11 @@
                         <div class="d-flex justify-content-end flex-row">
                             <button type="submit" class="btn btn-success mr-2">
                                 <i class="fa fa-save mr-1"></i>
-                                Save
+                                {{trans('common.save_label')}}
                             </button>
                             <button class="btn btn-danger mr-2">
                                 <i class="fa fa-ban mr-1"></i>
-                                Cancel
+                                {{trans('common.cancel_label')}}
                             </button>
                         </div>
                     </div>

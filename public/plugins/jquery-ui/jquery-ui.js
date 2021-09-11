@@ -10984,7 +10984,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 					w: ".ui-resizable-w",
 					se: ".ui-resizable-se",
 					sw: ".ui-resizable-sw",
-					ne: ".ui-resizable-ne",
+					ne: ".ui-resizable-nl",
 					nw: ".ui-resizable-nw"
 				} );
 
@@ -10992,7 +10992,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		if ( this.handles.constructor === String ) {
 
 			if ( this.handles === "all" ) {
-				this.handles = "n,e,s,w,se,sw,ne,nw";
+				this.handles = "n,e,s,w,se,sw,nl,nw";
 			}
 
 			n = this.handles.split( "," );
@@ -12497,7 +12497,7 @@ $.widget( "ui.dialog", {
 			position = this.uiDialog.css( "position" ),
 			resizeHandles = typeof handles === "string" ?
 				handles :
-				"n,e,s,w,se,sw,ne,nw";
+				"n,e,s,w,se,sw,nl,nw";
 
 		function filteredUi( ui ) {
 			return {

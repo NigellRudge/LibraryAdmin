@@ -7,10 +7,18 @@
                 <div class="col d-flex justify-content-between py-2">
                     <h4 class="font-weight-bold text-primary pl-2">Invoices</h4>
                     <div>
+                    @if($data['active_members'])
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddInvoice(event)" style="border-radius: 10px">
                             Add Invoice
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
+                    @else
+                        <div class="font-weight-bold text-secondary">
+                            No Active member, can't create invoice
+                        </div>
+                    @endif
+
+
                     </div>
                 </div>
             </div>
@@ -55,7 +63,7 @@
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table border-bottom border-left border-right display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
@@ -65,6 +73,7 @@
                                 <th>Status</th>
                                 <th>Invoice Date</th>
                                 <th>Type</th>
+                                <th>Description</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -111,7 +120,7 @@
     </div>
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
                     <h5 class="modal-title" id="addModalLabel">Add Invoice</h5>
@@ -134,8 +143,6 @@
                                     <select name="member_id" id="add_member" class="form-control"></select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row mt-3">
                             <div class="col">
                                 <label for="add_invoice_type" class="text-dark font-weight-bold">Invoice Type<span class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -165,8 +172,6 @@
                                     <input name="invoice_date" id="add_invoice_date" class="form-control" />
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row mt-3">
                             <div class="col">
                                 <label for="add_amount" class="text-dark font-weight-bold">Amount<span class="text-danger">*</span></label>
                                 <div class="input-group">
@@ -177,6 +182,12 @@
                                     </div>
                                     <input name="amount" placeholder="$0.00" type="number" min="0.01" max="10000000" step="0.5" id="add_amount" class="form-control" />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="col">
+                                <label for="add_description" class="text-dark font-weight-bold">Description<span class="text-danger">*</span></label>
+                                <textarea name="description" placeholder="Invoice description"  id="add_description" class="form-control" rows="4"></textarea>
                             </div>
                         </div>
                     </div>
@@ -190,7 +201,6 @@
     </div>
 
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="position: relative">
                 <div class="modal-header bg-primary text-light d-flex flex-row justify-content-between">
@@ -327,6 +337,7 @@
             let typeId = 0;
             let statusId = 0;
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -341,10 +352,11 @@
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'member', name: 'member'},
-                    { data: 'total_amount',name: 'total_amount'},
-                    { data: 'open_amount',name: 'open_amount'},
-                    { data: 'status',name: 'status'},
+                    { data: 'total_amount_info',name: 'total_amount_info'},
+                    { data: 'open_amount_info',name: 'open_amount_info'},
+                    { data: 'status_info',name: 'status_info'},
                     { data: 'invoice_date',name: 'invoice_date'},
+                    { data: 'description',name: 'description'},
                     { data: 'type',name: 'type'},
                     { data:'actions', name:'actions', orderable: false, searchable: false}
                 ]

@@ -52,22 +52,22 @@ class InvoiceController extends CommonController
 
                 })
                 ->addColumn('status_info', function ($row){
-                    $value = '';
-                    if(!$row->paid){
-                        $now = Carbon::now();
-                        $invoiceDate = Carbon::parse($row->invoice_date);
-                        $overdue = $invoiceDate->addDays($row->payment_term) < $now;
-                        if($overdue){
-                            return "<span class='bg-warning text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>overdue</span>";
-                        }
-                        return "<span class='text-secondary text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>open</span>";
-                    }
-                    return "<span class='bg-success text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>paid</span>";
+                    return $this->getItemStatusColumn($row->status_id,$row->status);
                 })
-                ->rawColumns(['actions','status_info'])
+                ->addColumn('total_amount_info', function ($row){
+                    $data = number_format($row->total_amount,2);
+                    return "<span class='font-weight-bold text-dark'>$</span>$data";
+                })
+                ->addColumn('open_amount_info', function ($row){
+                    $data = number_format($row->open_amount,2);
+                    return "<span class='font-weight-bold text-dark'>$</span>$data";
+                    //return  ' $' . number_format($row->open_amount,2);
+                })
+                ->rawColumns(['actions','status_info','open_amount_info','total_amount_info'])
                 ->make(true);
         }
         $this->data['types'] = DB::table('invoice_types')->select('id','name')->get();
+        $this->data['active_members'] = DB::table('members')->where('status_id',7)->count() > 0;
         $this->data['invoice_status'] = DB::table('status')->whereIn('id',[6,9])->select('id','name')->get();
         return view('fees.index')->with('data', $this->data);
     }
@@ -79,6 +79,7 @@ class InvoiceController extends CommonController
             'invoice_type' => 'required',
             'amount' => 'required|min:0.01'
         ]);
+        $data['description'] = isset($request['description']) ? $request['description'] : null;
         $data['invoice_date'] = Carbon::parse($data['invoice_date'])->toDateTimeString();
         $result = $this->invoiceService->addInvoice($data);
         if($result){
@@ -120,7 +121,7 @@ class InvoiceController extends CommonController
         $resultCount = 10;
         $memberId = $request['member_id'];
         $offset = ($page-1) * $resultCount;
-        $items = DB::table('invoice_info')->where('status_id','=',9)->select('id',DB::raw("CONCAT(invoice_date, ' $', total_amount) as text"));
+        $items = DB::table('invoice_info')->whereIn('status_id',[9,10])->select('id',DB::raw("CONCAT(invoice_date, ' $', open_amount) as text"));
         if($page){
             $items = $items->offset($offset)->take($resultCount);
         }

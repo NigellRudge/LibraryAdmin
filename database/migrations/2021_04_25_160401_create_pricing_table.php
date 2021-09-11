@@ -10,7 +10,7 @@ class CreatePricingTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
+ */
     public function up()
     {
         Schema::create('pricing', function (Blueprint $table) {
@@ -19,6 +19,7 @@ class CreatePricingTable extends Migration
             $table->foreignId('membership_type_id')->constrained('membership_types')->cascadeOnDelete();
             $table->decimal('amount_per_day',12,2)->default(2.50);
             $table->decimal('amount',12,2);
+            $table->integer('num_sub_members')->default(1);
             $table->timestamps();
         });
     }

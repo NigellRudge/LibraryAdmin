@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Categories</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.pricings_label')}}</h4>
                     <div>
-                        <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddCategory(event)" style="border-radius: 10px">
-                            Add Category
+                        <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="Add(event)" style="border-radius: 10px">
+                            {{trans('common.add_price_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -18,13 +18,23 @@
             <div class="card px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th># Books</th>
+                                <th>{{trans('common.name_label')}}</th>
+                                <th>{{trans('common.pricing_type_label')}}</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-user-cog text-primary"></i></span>
+                                    {{trans('common.membership_type_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-dollar-sign text-success"></i></span>
+                                    {{trans('common.amount_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-dollar-sign text-danger"></i></span>
+                                    {{trans('common.amount_per_day_label')}}
+                                </th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -74,7 +84,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Category</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add Pricing</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -86,22 +96,55 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="add_name" class="text-dark font-weight-bold">Name <span class="text-danger">*</span></label>
-                                    <input type="text" id="add_name" placeholder="Science-fiction, drama etc.." name="name" class="form-control">
+                                    <input type="text" id="add_name" name="name" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_code" class="text-dark font-weight-bold">Code <span class="text-danger">*</span></label>
-                                    <input type="text" id="add_code" placeholder="short code" name="code" class="form-control">
+                                    <label for="add_amount" class="text-dark font-weight-bold">Amount <span class="text-danger">*</span></label>
+                                    <input type="number" id="add_amount" placeholder="$0.00" name="amount" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="add_amount_per_day" class="text-dark font-weight-bold">Late fee <span class="text-danger">*</span></label>
+                                    <input type="number" id="add_amount_per_day" placeholder="$2.50" name="amount_per_day" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="add_pricing_type" class="text-dark font-weight-bold">Pricing Type <span class="text-danger">*</span></label>
+                                    <select id="add_pricing_type" name="pricing_type_id" class="form-control">
+                                        <option value="0">Select pricing</option>
+                                        @foreach($data['pricing_types'] as $type)
+                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="add_membership_type" class="text-dark font-weight-bold">Membership Type <span class="text-danger">*</span></label>
+                                    <select id="add_membership_type" name="membership_type_id" class="form-control">
+                                        <option value="0">Select type</option>
+                                        @foreach($data['membership_types'] as $type)
+                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save mr-1"></i>
+                            Yes
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -165,23 +208,24 @@
         const editForm = $('#editForm')
 
         $(document).ready(()=>{
-            let categoryId = 0;
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
                 pageLength:10,
                 ajax: {
-                    url: '{!! route('category.index') !!}',
+                    url: '{!! route('pricing.index') !!}',
                     data: function(d){
-                        d.categoryId = categoryId;
+
                     }
                 },
                 columns: [
-                    { data: 'id', name: 'id' },
                     { data: 'name', name: 'name'},
-                    { data: 'code',name: 'code'},
-                    { data: 'num_books',name: 'num_books'},
+                    { data: 'pricing_type',name: 'pricing_type'},
+                    { data: 'membership_type',name: 'membership_type'},
+                    { data: 'amount_info',name: 'amount_info'},
+                    { data: 'per_day_info',name: 'per_day_info'},
                     { data:'actions', name:'actions', orderable: false, searchable: false}
                 ]
             });
@@ -290,29 +334,19 @@
             })
         })
 
-        const AddCategory = ($event)=>{
+        const Add = ($event)=>{
             $event.preventDefault();
             addModal.modal('show')
         }
 
-        const EditCategory = ($event)=>{
+        const Edit = ($event)=>{
             $event.preventDefault();
-            let name = $event.target.getAttribute('data-name')
-            let code = $event.target.getAttribute('data-code')
             let id = $event.target.getAttribute('data-id')
-            $('#edit_name').val(name)
-            $('#edit_code').val(code)
-            $('#category_id').val(id)
-            editModal.modal('show')
         }
 
-        const RemoveCategory = (event)=>{
+        const Remove = (event)=>{
             event.preventDefault()
-            const categoryId = event.target.getAttribute('data-id')
-            const categoryName = event.target.getAttribute('data-name')
-            console.log([categoryId,categoryName])
-            $('#confirm_category').html(`${categoryName}`)
-            $('#remove_category_id').val(categoryId)
+            const id = event.target.getAttribute('data-id')
             removeModal.modal('show')
         }
     </script>

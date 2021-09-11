@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="font-weight-bold text-primary mb-1">Total Books</h5>
+                            <h5 class="font-weight-bold text-primary mb-1">{{trans('common.total_books_label')}}</h5>
                             <div class="h4 mb-0 font-weight-bold text-gray-800">{{$data['total_books']}}</div>
                         </div>
                         <div class="col-auto">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="d-flex justify-content-end mt-1">
                         <a href="{{ route('books.index') }}">
-                            <span class="text-sm font-weight-bold text-dark">View data </span>
+                            <span class="text-sm font-weight-bold text-dark">{{trans('common.learn_more_label')}}</span>
                             <i class="fas fa-arrow-circle-right  text-dark ml-1" style="font-size: 20px"></i>
                         </a>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="font-weight-bold text-info mb-1">Total Members</h5>
+                            <h5 class="font-weight-bold text-info mb-1">{{trans('common.total_members_label')}}</h5>
                             <div class="h4 mb-0 font-weight-bold text-gray-800">{{ $data['total_members'] }}</div>
                         </div>
                         <div class="col-auto">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="d-flex justify-content-end mt-1">
                         <a href="{{ route('members.index') }}">
-                            <span class="text-sm font-weight-bold text-dark">View data </span>
+                            <span class="text-sm font-weight-bold text-dark">{{trans('common.learn_more_label')}}</span>
                             <i class="fas fa-arrow-circle-right  text-dark ml-1" style="font-size: 20px"></i>
                         </a>
                     </div>
@@ -49,7 +49,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="font-weight-bold text-warning mb-1">Pending Membership requests</h5>
+                            <h5 class="font-weight-bold text-warning mb-1">{{trans('common.total_pending_applications')}}</h5>
                             <div class="h4 mb-0 font-weight-bold text-gray-800">{{ $data['pending_requests'] }}</div>
                         </div>
                         <div class="col-auto">
@@ -58,7 +58,7 @@
                     </div>
                     <div class="d-flex justify-content-end mt-1">
                         <a href="{{ route('requests.index') }}">
-                            <span class="text-sm font-weight-bold text-dark">View data </span>
+                            <span class="text-sm font-weight-bold text-dark">{{trans('common.learn_more_label')}}</span>
                             <i class="fas fa-arrow-circle-right  text-dark ml-1" style="font-size: 20px"></i>
                         </a>
                     </div>
@@ -70,7 +70,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <h5 class="font-weight-bold mb-1" style="color: purple;">Open Invoices</h5>
+                            <h5 class="font-weight-bold mb-1" style="color: purple;">{{trans('common.total_open_invoices_label')}}</h5>
                             <div class="h4 mb-0 font-weight-bold text-gray-800">{{ $data['open_invoices'] }}</div>
                         </div>
                         <div class="col-auto">
@@ -79,7 +79,7 @@
                     </div>
                     <div class="d-flex justify-content-end mt-1">
                         <a href="{{ route('invoices.index') }}">
-                            <span class="text-sm font-weight-bold text-dark">View data </span>
+                            <span class="text-sm font-weight-bold text-dark">{{trans('common.learn_more_label')}}</span>
                             <i class="fas fa-arrow-circle-right  text-dark ml-1" style="font-size: 20px"></i>
                         </a>
                     </div>

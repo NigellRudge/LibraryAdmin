@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Membership applications</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.members_applications_label')}}</h4>
                     <div>
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddRequest(event)" style="border-radius: 10px">
-                            New Application
+                            {{trans('common.member_add_application')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -17,22 +17,22 @@
             <div class="card  px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="row pl-2 mb-3">
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
                             <div class="form-group">
-                                <label for="status_filter" class="col-form-label font-weight-bold">Filter By Status</label>
+                                <label for="status_filter" class="col-form-label font-weight-bold">{{trans('common.book_copy_status_label')}}</label>
                                 <select type="text" id="status_filter" name="status_filter" class="form-control">
-                                    <option value="0">All</option>
+                                    <option value="0">{{trans('common.all_label')}}</option>
                                     @foreach($data['statuses'] as $status)
                                         <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4w col-md-4 col-sm-5">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
                             <div class="form-group">
-                                <label for="type_filter" class="col-form-label font-weight-bold">Filter By Membership type</label>
+                                <label for="type_filter" class="col-form-label font-weight-bold">{{trans('common.membership_types_label')}}</label>
                                 <select type="text" id="type_filter" name="type_filter" class="form-control">
-                                    <option value="0">All</option>
+                                    <option value="0">{{trans('common.all_label')}}</option>
                                     @foreach($data['membership_types'] as $type)
                                         <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
@@ -41,25 +41,37 @@
                         </div>
                         <div class="col d-flex pt-3 align-items-center">
                             <button class="btn btn-primary text-light font-weight-bold mr-2" id="filterBtn">
-                                Filter
+                                {{trans('common.filter_label')}}
                                 <i class="fas fa-filter ml-1"></i>
                             </button>
                             <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
-                                Clear
+                                {{trans('common.clear_label')}}
                                 <i class="fas fa-ban ml-1"></i>
                             </button>
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table order-column  border-right border-left border-bottom table-hover display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>Member</th>
-                                <th>Membership type</th>
-                                <th>Request Date</th>
-                                <th>status</th>
-                                <th>Processed Date</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-user text-primary"></i></span>
+                                    {{trans('common.member_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-users-cog text-primary"></i></span>
+                                    {{trans('common.membership_types_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-calendar text-primary"></i></span>
+                                    {{trans('common.request_date_label')}}
+                                </th>
+                                <th>{{trans('common.book_copy_status_label')}}</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-calendar-check text-primary"></i></span>
+                                    {{trans('common.process_date_label')}}
+                                </th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -76,7 +88,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Membership Request</h5>
+                    <h5 class="modal-title" id="addModalLabel">{{trans('common.member_add_application')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -87,23 +99,23 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_request_date" class="text-dark font-weight-bold">Request Date<span class="text-danger">*</span></label>
+                                    <label for="add_request_date" class="text-dark font-weight-bold">{{trans('common.request_date_label')}}<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-white">
                                                 <i class="fa fa-calendar text-primary"></i>
                                             </div>
                                         </div>
-                                        m<input type="text" id="add_request_date" name="request_date" class="form-control">
+                                        <input type="text" id="add_request_date" name="request_date" class="form-control">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_membership_type_id" class="text-dark  font-weight-bold">Membership type<span class="text-danger">*</span></label>
+                                    <label for="add_membership_type_id" class="text-dark  font-weight-bold">{{trans('common.membership_types_label')}}<span class="text-danger">*</span></label>
                                     <select type="text" id="add_membership_type_id" name="membership_type_id" class="form-control">
-                                        <option value="0">Select Membership type</option>
+                                        <option value="0">{{trans('common.select_mem_type_label')}}</option>
                                         @foreach($data['membership_types'] as $type)
                                             <option value="{{ $type->id }}">{{$type->name}}</option>
                                         @endforeach
@@ -114,20 +126,20 @@
                             <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_first_name" class="text-dark font-weight-bold">First Name <span class="text-danger">*</span></label>
+                                    <label for="add_first_name" class="text-dark font-weight-bold">{{trans('common.first_name_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="add_first_name" placeholder="John" name="first_name" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_last_name" class="text-dark  font-weight-bold">Last Name <span class="text-danger">*</span></label>
+                                    <label for="add_last_name" class="text-dark  font-weight-bold">{{trans('common.last_name_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="add_last_name" placeholder="Smith" name="last_name" class="form-control">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_birth_date" class="text-dark  font-weight-bold">Birth Date <span class="text-danger">*</span></label>
+                                    <label for="add_birth_date" class="text-dark  font-weight-bold">{{trans('common.birth_date')}} <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-white">
@@ -142,9 +154,9 @@
                         <div class="form-row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="add_gender">Gender <span class="text-danger">*</span></label>
+                                    <label for="add_gender" class="font-weight-bold text-dark">{{trans('gender')}} <span class="text-danger">*</span></label>
                                     <select class="form-control" id="add_gender" name="gender_id">
-                                        <option value="0">Select gender</option>
+                                        <option value="0">{{trans('common.select_gender_label')}}</option>
                                         @foreach($data['genders'] as $gender)
                                             <option value="{{ $gender->id }}">{{$gender->name}}</option>
                                         @endforeach
@@ -153,7 +165,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_email" class="text-dark font-weight-bold">Email</label>
+                                    <label for="add_email" class="text-dark font-weight-bold">{{trans('common.auth_email_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-white">
@@ -166,7 +178,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_phone_number" class="text-dark font-weight-bold">Phone Number</label>
+                                    <label for="add_phone_number" class="text-dark font-weight-bold">{{trans('common.phone_number_label')}}</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text bg-white">
@@ -181,18 +193,18 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_address" class="text-dark font-weight-bold">Address</label>
+                                    <label for="add_address" class="text-dark font-weight-bold">{{trans('common.address_label')}}</label>
                                     <input type="text" id="add_address" placeholder="street A #12" name="address" class="form-control">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-8">
-                                <div class="mb-1 mt-1 text-dark font-weight-bold">Picture</div>
+                                <div class="mb-1 mt-1 text-dark font-weight-bold">{{trans('common.picture_label')}}</div>
                                 <div class="form-group">
                                     <div class="custom-file mb-1">
                                         <input type="file" class="custom-file-input" id="add_picture" name="picture">
-                                        <label class="custom-file-label" for="add_picture">Choose file</label>
+                                        <label class="custom-file-label" for="add_picture">{{trans('common.choose_file_label')}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -203,8 +215,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>
-                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">
+                                <i class="fa fa-save mr-1"></i>
+                                {{trans('common.save_label')}}
+                            </button>
+                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">
+                                {{trans('common.cancel_label')}}</button>
                         </div>
                     </div>
                 </form>
@@ -216,7 +232,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editModalLabel">Edit Membership Request</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{trans('common.member_edit_application')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -229,7 +245,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_request_date" class="text-dark font-weight-bold">Request Date<span class="text-danger">*</span></label>
+                                    <label for="edit_request_date" class="text-dark font-weight-bold">{{trans('common.request_date_label')}}<span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -244,9 +260,9 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_membership_type_id" class="text-dark  font-weight-bold">Membership type<span class="text-danger">*</span></label>
+                                    <label for="edit_membership_type_id" class="text-dark  font-weight-bold">{{trans('common.membership_types_label')}}<span class="text-danger">*</span></label>
                                     <select type="text" id="edit_membership_type_id" name="membership_type_id" class="form-control">
-                                        <option value="0">Select Membership type</option>
+                                        <option value="0">{{trans('common.select_mem_type_label')}}</option>
                                         @foreach($data['membership_types'] as $type)
                                             <option value="{{ $type->id }}">{{$type->name}}</option>
                                         @endforeach
@@ -257,14 +273,18 @@
                         <div class="form-row">
                         <div class="col">
                             <div class="form-group">
-                                <label for="edit_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
+                                <label for="edit_member" class="text-dark font-weight-bold">{{trans('common.member_label')}}<span class="text-danger">*</span></label>
                                 <input type="text" id="edit_member" name="member" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>
-                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                            <button type="submit" class="btn btn-success col-lg-3 col-md-3 col-sm-5">
+                                <span class="mr-1"><i class="fa fa-save"></i></span>
+                                {{trans('common.update_label')}}
+                            </button>
+                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">
+                                {{trans('common.cancel_label')}}</button>
                         </div>
                     </div>
                 </form>
@@ -276,7 +296,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="detailModalLabel">Request info</h5>
+                    <h5 class="modal-title" id="detailModalLabel">{{trans('common.application_info_labels')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -290,43 +310,55 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Name:</div>
+                                <div class="font-weight-bold text-secondary">{{trans('common.name_label')}}:</div>
                                 <span class="" id="d_name">Deyon Rudge</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Gender:</div>
+                                <div class="font-weight-bold text-secondary">{{trans('common.gender_label')}}:</div>
                                 <span class="" id="d_gender">male</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">BirthDate:</div>
+                                <div class="font-weight-bold text-secondary">
+                                    <span class="mr-1"><i class="fa fa-calendar text-primary"></i></span>
+                                    {{trans('common.birth_date')}}:
+                                </div>
                                 <span class="" id="d_birth_date">Jan 1st 2000</span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Email:</div>
+                                <div class="font-weight-bold text-secondary">
+                                    <span class="mr-1"><i class="fa fa-envelope text-primary"></i></span>
+                                    {{trans('common.email_label')}}:
+                                </div>
                                 <span class="" id="d_email">deyon@gmail.com</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Phone number:</div>
+                                <div class="font-weight-bold text-secondary">
+                                    <span class="mr-1"><i class="fa fa-phone text-primary"></i></span>
+                                    {{trans('common.phone_number_label')}}:
+                                </div>
                                 <span class="" id="d_phone_number">(+597) 998833</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Address:</div>
+                                <div class="font-weight-bold text-secondary">
+                                    <span class="mr-1"><i class="fa fa-location-arrow text-primary"></i></span>
+                                    {{trans('common.address_label')}}:
+                                </div>
                                 <span class="" id="d_address">Street name #19</span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Requested on:</div>
+                                <div class="font-weight-bold text-secondary">{{trans('common.request_date_label')}}:</div>
                                 <span class="" id="d_requested_on">Jan 1st 2021</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Package:</div>
+                                <div class="font-weight-bold text-secondary">{{trans('common.membership_types_label')}}:</div>
                                 <span class="" id="d_package">Single package</span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">Status:</div>
+                                <div class="font-weight-bold text-secondary">{{trans('common.book_copy_status_label')}}:</div>
                                 <span class="" id="d_status">pending</span>
                             </div>
                         </div>
@@ -340,7 +372,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="removeModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="removeModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -354,15 +386,18 @@
                                 <i class="far fa-question-circle text-primary"></i>
                             </div>
                             <div class="pt-2 text-dark">
-                                Are you sure you want to remove this Membership request:<br>
+                                {{trans('common.application_delete_confirm_label')}}:<br>
                                 <div class="d-inline text-dark text-capitalize font-weight-bold" id="confirm_request"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">delete</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">
+                            <span class="mr-1"><i class="fa fa-trash"></i></span>
+                            {{trans('common.delete_label')}}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.cancel_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -373,7 +408,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="processModalLabel">Process Request</h5>
+                    <h5 class="modal-title" id="processModalLabel">{{trans('common.application_process_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -384,18 +419,18 @@
                     <div class="pt-2 px-3 pb-2">
                         <div class="form-row">
                             <div class="col">
-                                <label for="process_name" class="font-weight-bold text-dark">Name</label>
+                                <label for="process_name" class="font-weight-bold text-dark">{{trans('common.name_label')}}</label>
                                 <input type="text" class="form-control" id="process_name" readonly></div>
                             <div class="col">
-                                <label for="process_request_date" class="font-weight-bold text-dark">Request Date</label>
+                                <label for="process_request_date" class="font-weight-bold text-dark">{{trans('common.request_date_label')}}</label>
                                 <input type="text" id="process_request_date" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="form-row mt-2">
                             <div class="col">
-                                <label for="process_result_id" class="text-dark font-weight-bold">Result <span class="text-danger">*</span></label>
+                                <label for="process_result_id" class="text-dark font-weight-bold">{{trans('common.result_label')}} <span class="text-danger">*</span></label>
                                 <select id="process_result_id" name="result_id" class="form-control">
-                                    <option value="0">Select result</option>
+                                    <option value="0">{{trans('common.result_select_label')}}</option>
                                     @foreach($data['actions'] as $action)
                                         <option value="{{ $action->id }}">{{$action->name}}</option>
                                     @endforeach
@@ -404,7 +439,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="process_date" class="text-dark font-weight-bold">Process Date <span class="text-danger">*</span></label>
+                                <label for="process_date" class="text-dark font-weight-bold">{{trans('common.process_date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -417,8 +452,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.close_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -428,6 +466,11 @@
 
 @section('custom_css')
     @include('shared.totalCSS')
+    <style>
+        .order-column{
+
+        }
+    </style>
 @endsection
 
 @section('custom_js')
@@ -455,6 +498,7 @@
             const filterBtn = $('#filterBtn')
             const clearBtn = $('#clearBtn')
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -697,8 +741,9 @@
                     if(xhr.status === 201){
                         const {request} =  xhr.responseJSON
                         console.log(request)
+                        let statusElement = $('#d_status')
                         $('#d_name').html(`${request.member}`)
-                        $('#d_status').html(`${request.status}`)
+                        statusElement.html(`${request.status}`)
                         $('#d_package').html(`${request.membership_type}`)
                         $('#d_requested_on').html(`${request.request_date}`)
                         $('#d_birth_date').html(`${request.birth_date}`)
@@ -708,11 +753,23 @@
                         if(request.member_picture !== null){
                             $('#d_image').attr('src',request.member_picture)
                         }
+                        statusElement.css({'font-size': '0.9rem','padding':'3px 8px  3px 8px','border-radius': '8px','font-weight': 600})
+                        statusElement.addClass('text-light')
+                        switch(request.status_id){
+                            case 3:
+                                statusElement.addClass('bg-secondary')
+                                break;
+                            case 4:
+                                statusElement.addClass('bg-success')
+                                break
+                            case 5:
+                                statusElement.addClass('bg-warning')
+                                break
+                        }
+                        detailModal.modal('show')
                     }
                 }
             })
-
-            detailModal.modal('show')
 
         }
 

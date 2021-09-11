@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Categories</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.categories_label')}}</h4>
                     <div>
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddCategory(event)" style="border-radius: 10px">
-                            Add Category
+                            {{trans('common.add_category_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -18,13 +18,13 @@
             <div class="card px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th># Books</th>
+                                <th>{{trans('common.name_label')}}</th>
+                                <th>{{trans('common.code_label')}}</th>
+                                <th>{{trans('common.num_books_label')}}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -41,7 +41,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -55,15 +55,20 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Category:<br>
+                                {{trans('common.confirm_delete_category')}}<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_category"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">
+                            <span class="mr-1"><i class="fa fa-trash"></i></span>
+                            {{trans('common.yes_label')}}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            {{trans('common.no_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -74,7 +79,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Category</h5>
+                    <h5 class="modal-title" id="addModalLabel">{{trans('common.add_category_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -85,7 +90,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_name" class="text-dark font-weight-bold">Name <span class="text-danger">*</span></label>
+                                    <label for="add_name" class="text-dark font-weight-bold">{{trans('common.name_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="add_name" placeholder="Science-fiction, drama etc.." name="name" class="form-control">
                                 </div>
                             </div>
@@ -93,15 +98,21 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_code" class="text-dark font-weight-bold">Code <span class="text-danger">*</span></label>
+                                    <label for="add_code" class="text-dark font-weight-bold">{{trans('common.code_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="add_code" placeholder="short code" name="code" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="mr-1"><i class="fa fa-ban"></i></span>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -112,7 +123,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editModalLabel">Edit Category</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{trans('common.edit_category_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -124,7 +135,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_name" class="text-dark font-weight-bold">Name <span class="text-danger">*</span></label>
+                                    <label for="edit_name" class="text-dark font-weight-bold">{{trans('common.name_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="edit_name" placeholder="Science-fiction, drama etc.." name="name" class="form-control">
                                 </div>
                             </div>
@@ -132,15 +143,21 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_code" class="text-dark font-weight-bold">Code <span class="text-danger">*</span></label>
+                                    <label for="edit_code" class="text-dark font-weight-bold">{{trans('common.code_label')}} <span class="text-danger">*</span></label>
                                     <input type="text" id="edit_code" placeholder="short code" name="code" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="editSubmitBtn">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success" id="editSubmitBtn">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="mr-1"><i class="fa fa-ban"></i></span>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -167,6 +184,7 @@
         $(document).ready(()=>{
             let categoryId = 0;
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -198,7 +216,7 @@
                             const {message} = xhr.responseJSON
                             removeModal.modal('hide')
                             dataTable.ajax.reload()
-                            toastr.warning(message,'Success')
+                            toastr.warning(message,'{!! trans('common.success_label') !!}')
                         }
                     }
 
@@ -235,13 +253,13 @@
                         if(xhr.status === 201){
                             const {message} = xhr.responseJSON
                             addModal.modal('hide')
-                            toastr.success(message,'Success')
+                            toastr.success(message,'{!! trans('common.success_label') !!}')
                             dataTable.ajax.reload()
                         }
                         if(xhr.status === 401){
                             const {message} = xhr.responseJSON
                             addModal.modal('hide')
-                            toastr.error(message,'Error!')
+                            toastr.error(message,'{!! trans('common.error_label') !!}')
                         }
                     }
                 })
@@ -277,13 +295,13 @@
                         if(xhr.status === 201){
                             const {message} = xhr.responseJSON
                             editModal.modal('hide')
-                            toastr.success(message,'Success')
+                            toastr.success(message,'{!! trans('common.success_label') !!}')
                             dataTable.ajax.reload()
                         }
                         if(xhr.status === 401){
                             const {message} = xhr.responseJSON
                             editModal.modal('hide')
-                            toastr.error(message,'Error!')
+                            toastr.error(message,'{!! trans('common.error_label') !!}')
                         }
                     }
                 })

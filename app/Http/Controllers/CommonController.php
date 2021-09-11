@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use MongoDB\Driver\Session;
 use phpDocumentor\Reflection\Types\Integer;
 
 class CommonController extends Controller
@@ -16,37 +17,56 @@ class CommonController extends Controller
     {
         $this->data['genders'] = DB::table('genders')->select('id','name')->get();
         $this->data['category_name'] = '';
+
+    }
+
+    public function getLang(){
+        if(auth()->user()) {
+            $this->data['lang_name'] = "Negro";
+        }
     }
 
     protected function getItemStatusColumn($status, $value){
+        $spanStyle = "style='font-size: 0.8rem;padding:5px;border-radius: 10px;font-weight: 600'";
+        $textColor = "text-white";
         switch ($status){
             case 1:
-                return "<span class='bg-success text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
+            case 4:
+            case 6:
+            case 7:
+                $color='bg-success';
                 break;
             case 2:
-                return "<span class='bg-secondary text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
-                break;
-            case 3:
-                return "<span class='bg-info text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
-                break;
-            case 4:
-                return "<span class='bg-success text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
+                $color='bg-secondary';
                 break;
             case 5:
-                return "<span class='bg-warning text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
-                break;
-            case 6:
-                return "<span class='bg-success text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
-                break;
-            case 7:
-                return "<span class='bg-success text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
-                break;
             case 8:
-                return "<span class='bg-warning text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
+                $color ='bg-warning';
+                break;
+            case 10:
+                $color='bg-danger';
                 break;
             default:
-                return "<span class='bg-info text-light' style='font-size: 0.8rem;padding:1px 5px  1px 5px;border-radius: 8px;font-weight: 600'>$value</span>";
+                $color = 'bg-info';
                 break;
         }
+        return "<span class='$color $textColor' $spanStyle>$value</span>";
+    }
+
+    protected function getConditionColumn($status, $value){
+        $spanStyle = "style='font-size: 0.8rem;padding:5px;border-radius: 10px;font-weight: 600'";
+        $textColor = "text-white";
+        switch ($status){
+            case 2:
+                $color='bg-secondary';
+                break;
+            case 3:
+                $color ='bg-warning';
+                break;
+            default:
+                $color = 'bg-success';
+                break;
+        }
+        return "<span class='$color $textColor' $spanStyle>$value</span>";
     }
 }

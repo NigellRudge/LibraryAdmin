@@ -177,14 +177,17 @@ class MemberService
     }
 
     public function processMembership(array $data){
+        $result = false;
         $membershipRequest = MembershipRequest::findOrFail($data['request_id']);
         $newMembershipStatusId = $data['result_id'] == 1 ? 4 : 5;
         $newMemberStatusId =$data['result_id'] == 1 ? 7 : 8;
-        return DB::transaction(function() use($newMembershipStatusId, $newMemberStatusId,$data,$membershipRequest){
+        DB::transaction(function() use($newMembershipStatusId, $newMemberStatusId,$data,$membershipRequest,$result){
             DB::table('membership_requests')->where('id','=',$data['request_id'])->update(['status_id' => $newMembershipStatusId, 'processed_date'=> $data['process_date']]);
             DB::table('members')->where('id','=',$membershipRequest->member_id)->update(['status_id' => $newMemberStatusId]);
             $result = true;
         });
+        //TODO: create entree invoice
+        return $result;
     }
 
     public function getMemberLoans($memberId,array $filterOptions = null){

@@ -8,31 +8,26 @@
                     <div class="col-xl-4 col-md-8 col-sm-10 container">
                         <div class="text-center justify-content-center d-flex flex-row">
                             <div class="d-flex flex-row">
-                                <i class="fas fa-book-reader text-primary mr-2 " style="font-size: 2.5rem;"></i>
+                                <i class="fas fa-book-reader text-white mr-2 " style="font-size: 2.5rem;"></i>
                             </div>
 
                             <h3 class="font-weight-bolder pt-2 text-light">Library Admin</h3>
                         </div>
                         <div class="card rounded shadow-sm">
-                            <div class="card-header bg-white border-bottom-0">
-                                <div class="text-center">
-                                    <h4 class=" font-weight-bold text-dark" >Login</h4>
-                                </div>
-                            </div>
                             <form action="{{route('login')}}" method="POST">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="email" class="font-weight-bold text-dark">Email</label>
+                                                <label for="email_input" class="font-weight-bold text-secondary">{{trans('common.auth_email_label')}}</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text bg-primary">
-                                                            <i class="fas fa-envelope text-light"></i>
+                                                        <div class="input-group-text bg-white">
+                                                            <i class="fas fa-envelope text-primary"></i>
                                                         </div>
                                                     </div>
-                                                    <input type="text" id="email" name="email" placeholder="example@test.com" class="form-control">
+                                                    <input type="text" id="email_input" name="email" placeholder="example@test.com" class="form-control">
 
                                                 </div>
                                             </div>
@@ -41,11 +36,11 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="password" class="font-weight-bold text-dark">Password</label>
+                                                <label for="password" class="font-weight-bold text-secondary">{{trans('common.auth_password_label')}}</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <div class="input-group-text bg-primary">
-                                                            <i class="fa fa-lock text-light"></i>
+                                                        <div class="input-group-text bg-white">
+                                                            <i class="fa fa-lock text-primary"></i>
                                                         </div>
                                                     </div>
                                                     <input type="password" id="password" name="password" class="form-control">
@@ -57,7 +52,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="pl-3 pr-3">
-                                            @error('email')
+                                            @error('error')
                                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                 <strong>Error!</strong> {{ $message }}
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -71,7 +66,7 @@
                                 <div class="card-footer bg-white border-top-0">
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-xl-3 col-md-4 col-sm-6">
-                                            <button type="submit" class="btn btn-block btn-primary font-weight-bold text-light">Login</button>
+                                            <button type="submit" class="btn btn-primary btn-block font-weight-bold">{{trans('common.auth_login_label')}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -85,10 +80,23 @@
 
 @endsection
 
-@section('custom_css')
+@section('css')
 
 @endsection
 
-@section('custom_js')
+@section('js')
+    @include('shared.totalJS')
+    <script>
 
+            const emailInput = $('#email_input')
+            const emailLabel = $('#email_label')
+
+            const passwordInput = $('#password_input')
+            const passwordLabel = $('#password_label')
+
+            emailInput.on('change', function(event){
+                console.log('hello')
+            })
+
+    </script>
 @endsection

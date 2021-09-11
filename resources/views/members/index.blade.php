@@ -5,62 +5,73 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Members</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.members_label')}}</h4>
                 </div>
             </div>
             <div class="card  px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="row pl-2 mb-3">
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
                             <div class="form-group row">
-                                <label for="gender_filter" class="col-form-label font-weight-bold">Filter By Gender</label>
                                 <div class="col">
+                                    <label for="gender_filter" class="col-form-label font-weight-bold">Gender</label>
                                     <select type="text" id="gender_filter" name="gender_id" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.gender_label')}}</option>
                                         @foreach($data['genders'] as $gender)
                                             <option value="{{ $gender->id }}">
-                                                {{ $gender->name }}
+                                                {{ ucfirst($gender->name) }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
                             <div class="form-group row">
-                                <label for="status_filter" class="col-form-label font-weight-bold">Filter By Status</label>
                                 <div class="col">
+                                    <label for="status_filter" class="col-form-label font-weight-bold">{{trans('common.book_copy_status_label')}}</label>
                                     <select type="text" id="status_filter" name="status_id" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.all_label')}}</option>
                                         @foreach($data['statuses'] as $status)
-                                            <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                            <option value="{{ $status->id }}">{{ ucfirst($status->name) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <button class="btn btn-primary text-light font-weight-bold" id="filterBtn">
-                                Filter
-                                <i class="fas fa-filter ml-1"></i>
-                            </button>
-                            <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
-                                Clear
-                                <i class="fas fa-ban ml-1"></i>
-                            </button>
+                        <div class="col d-flex flex-column justify-content-center pt-4">
+                            <div class="row">
+                                <button class="btn btn-primary text-light font-weight-bold mr-1" id="filterBtn">
+                                    {{trans('common.filter_label')}}
+                                    <i class="fas fa-filter ml-1"></i>
+                                </button>
+                                <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
+                                    {{trans('common.clear_label')}}
+                                    <i class="fas fa-ban ml-1"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Status</th>
-                                <th>Package</th>
-                                <th>Email</th>
-                                <th>PhoneNumber</th>
+                                <th>{{trans('common.name_label')}}</th>
+                                <th>{{trans('common.gender_label')}}</th>
+                                <th>{{trans('common.age_label')}}</th>
+                                <th>{{trans('common.book_copy_status_label')}}</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-users-cog text-primary"></i></span>
+                                    {{trans('common.membership_types_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-envelope text-primary"></i></span>
+                                    {{trans('common.email_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-phone text-primary"></i></span>
+                                    {{trans('common.phone_number_label')}}
+                                </th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -73,124 +84,11 @@
         </div>
     </div>
 
-{{--    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">--}}
-{{--        <div class="modal-dialog modal-lg" role="document">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header bg-primary text-light">--}}
-{{--                    <h5 class="modal-title" id="editModalLabel">Add Member</h5>--}}
-{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                        <span aria-hidden="true" class="text-light">&times;</span>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <form method="post" action="#" id="addForm" enctype="multipart/form-data">--}}
-{{--                    @csrf--}}
-{{--                    <div class="modal-body px-3 py-2">--}}
-{{--                        <div class="form-row">--}}
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="edit_first_name" class="text-dark font-weight-bold">First Name <span class="text-danger">*</span></label>--}}
-{{--                                    <input type="text" id="edit_first_name" name="first_name" class="form-control">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="edit_last_name" class="text-dark  font-weight-bold">Last Name <span class="text-danger">*</span></label>--}}
-{{--                                    <input type="text" id="edit_last_name" name="last_name" class="form-control">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="add_birth_date" class="text-dark  font-weight-bold">Birth Date <span class="text-danger">*</span></label>--}}
-{{--                                    <div class="input-group">--}}
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <div class="input-group-text">--}}
-{{--                                                <i class="fa fa-calendar text-dark"></i>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <input type="text" id="add_birth_date" name="birth_date" class="form-control">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-row">--}}
-{{--                            <div class="col-4">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="add_gender">Gender <span class="text-danger">*</span></label>--}}
-{{--                                    <select class="form-control" id="add_gender" name="gender_id">--}}
-{{--                                        <option value="0">Select gender</option>--}}
-{{--                                        @foreach($data['genders'] as $gender)--}}
-{{--                                            <option value="{{ $gender->id }}">{{$gender->name}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="add_email" class="text-dark font-weight-bold">Email</label>--}}
-{{--                                    <div class="input-group">--}}
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <div class="input-group-text">--}}
-{{--                                                <span class="text-dark">@</span>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <input type="text" placeholder="name@email.com" id="add_email" name="email" class="form-control">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="add_phone_number" class="text-dark font-weight-bold">Phone Number</label>--}}
-{{--                                    <div class="input-group">--}}
-{{--                                        <div class="input-group-prepend">--}}
-{{--                                            <div class="input-group-text">--}}
-{{--                                                <i class="fa fa-phone text-dark"></i>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <input type="text" placeholder="(+597) 0000000" id="add_phone_number" name="phone_number" class="form-control">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-row">--}}
-{{--                            <div class="col">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="add_address" class="text-dark font-weight-bold">Address</label>--}}
-{{--                                    <input type="text" id="add_address" placeholder="street A #12" name="address" class="form-control">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="form-row">--}}
-{{--                            <div class="col-8">--}}
-{{--                                <div class="mb-1 mt-1 text-dark font-weight-bold">Picture</div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <div class="custom-file mb-1">--}}
-{{--                                        <input type="file" class="custom-file-input" id="add_picture" name="picture">--}}
-{{--                                        <label class="custom-file-label" for="add_picture">Choose file</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="col py-2">--}}
-{{--                                <div class="d-flex justify-content-center align-items-center">--}}
-{{--                                    <img src="{{ asset('storage/placeholder-male.jpg') }}" alt="Member Image" width="70" height="120" style="object-fit: cover">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-footer">--}}
-{{--                            <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5">Yes</button>--}}
-{{--                            <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
     <div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="removeModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="removeModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="removeModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -204,16 +102,16 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Member:<br>
+                                {{trans('common.members_delete_confirm_label')}}:<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_member"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-info">Terminate Membership</button>
-                        <button type="submit" class="btn btn-outline-danger">delete</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">{{trans('common.members_terminate_confirm_label')}}</button>
+                        <button type="submit" class="btn btn-danger">{{trans('common.delete_label')}}</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.close_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -230,12 +128,6 @@
     <script>
         const removeModal = $('#removeModal')
         const removeForm = $('#remove_form')
-
-        // const addModal = $('#addModal')
-        // const addForm = $('#addForm')
-
-        // const editModal = $('#editModal')
-        // const editForm = $('#editForm')
         $(document).ready(()=>{
             let genderId = 0;
             let statusId = 0;
@@ -244,6 +136,7 @@
             const filterBtn = $('#filterBtn')
             const clearBtn = $('#clearBtn')
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -337,20 +230,6 @@
             })
         })
 
-        // const AddMember = ($event)=>{
-        //     $event.preventDefault();
-        //     console.log('click')
-        //     addModal.modal('show')
-        //
-        //     $('#add_birth_date').daterangepicker({
-        //         singleDatePicker:true,
-        //         autoUpdateInput: true,
-        //         showDropdowns: true,
-        //         minYear: 1901,
-        //         drops:'auto'
-        //     })
-        // }
-
         const DeleteMember = ($event)=>{
             $event.preventDefault();
             let id = $event.target.getAttribute('data-id')
@@ -359,11 +238,6 @@
             $('#remove_member_id').val( parseInt(id))
             removeModal.modal('show')
         }
-
-        // const EditMember = ($event)=>{
-        //     $event.preventDefault()
-        // }
-
 
     </script>
 @endsection

@@ -19,7 +19,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="title" class="text-dark font-weight-bold">Title <span class="text-danger">*</span></label>
+                                            <label for="title" class="text-dark font-weight-bold">{{trans('common.book_title_label')}} <span class="text-danger">*</span></label>
                                             <input type="text" id="title" name="title" class="form-control" value="{{ $data['book']['title'] }}">
                                             @error('title')
                                             <span class="error">{{$message}}</span>
@@ -46,7 +46,7 @@
 
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="author" class="text-dark font-weight-bold">Author<span class="text-danger">*</span></label>
+                                            <label for="author" class="text-dark font-weight-bold">{{trans('common.author_label')}}<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -64,7 +64,7 @@
                                 <div class="form-row py-2">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="pub_date" class="text-dark  font-weight-bold">Publication Date <span class="text-danger">*</span></label>
+                                            <label for="pub_date" class="text-dark  font-weight-bold">{{trans('common.books_pub_date_label')}} <span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="num_pages" class="text-dark font-weight-bold">Number of Pages</label>
+                                            <label for="num_pages" class="text-dark font-weight-bold">{{trans('common.books_number_page_label')}}</label>
                                             <input type="number" id="num_pages" placeholder="100" name="num_pages" step="1.0" min="1" class="form-control" value="{{ $data['book']['num_pages'] }}">
                                             @error('num_pages')
                                             <span class="error">{{$message}}</span>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label for="sale_price" class="text-dark font-weight-bold">Sale price</label>
+                                            <label for="sale_price" class="text-dark font-weight-bold">{{trans('common.books_sales_price_label')}}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -106,7 +106,7 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label for="purchase_price" class="text-dark font-weight-bold">Purchase Price</label>
+                                            <label for="purchase_price" class="text-dark font-weight-bold">{{trans('common.books_purchase_price_label')}}</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="form-row py-2">
                                     <div class="col">
-                                        <div class="mb-1 mt-1 text-dark font-weight-bold">Cover Image</div>
+                                        <div class="mb-1 mt-1 text-dark font-weight-bold">{{trans('common.books_cover_image_label')}}</div>
                                         <div class="form-group">
                                             <div class="custom-file mb-1">
                                                 <input type="file" class="custom-file-input" id="cover" name="cover" value="{{ $data['book']['cover'] }}">
@@ -134,18 +134,18 @@
 
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="categories">Categories</label>
+                                            <label for="categories">{{trans('common.categories_label')}}</label>
                                             <select name="categories[]" id="categories" multiple class="form-control"></select>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
-                                            <label for="age_restricted">Age restricted <span class="text-danger">*</span></label>
+                                            <label for="age_restricted">{{trans('common.books_age_restricted_label')}} <span class="text-danger">*</span></label>
                                             <select class="form-control" id="age_restricted" name="age_restricted">
                                                 @if($data['book']['age_restricted'])
-                                                    <option value="1">Yes</option>
+                                                    <option value="1">{{trans('common.yes_label')}}</option>
                                                 @else
-                                                    <option value="0">No</option>
+                                                    <option value="0">{{trans('common.no_label')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -153,17 +153,17 @@
                                 </div>
                                 <div class="form-row py-2">
                                     <div class="col">
-                                        <label for="description" class="text-dark  text-dark font-weight-bold">Short description</label>
-                                        <textarea rows="5" id="description" name="short_description" class="form-control">{{$data['book']['short_description'] }}</textarea>
+                                        <label for="description" class="text-dark  text-dark font-weight-bold">{{trans('common.books_description_label')}}</label>
+                                        <textarea rows="5" id="description" name="short_description" placeholder="{{trans('common.books_description_example')}}"  class="form-control">{{$data['book']['short_description'] }}</textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5 mr-2">
                                     <i class="fa fa-save mr-2"></i>
-                                    Save
+                                    {{trans('common.save_label')}}
                                 </button>
-                                <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">{{trans('common.cancel_label')}}</button>
                             </div>
                         </form>
                     </div>

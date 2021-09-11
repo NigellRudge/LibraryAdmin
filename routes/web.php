@@ -9,8 +9,11 @@ use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MembershipRequestsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PricingController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,14 +25,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::post('/login',[AuthController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
-
-Route::group(['middleware' =>'auth'],function(){
-
+Route::group(['middleware' =>['customAuth', 'lang']],function(){
+    Route::post('/changeLang', [AuthController::class,'changeLanguage'])->name('change_language');
     Route::group(['prefix'=>'/books','as' => 'books.'],function(){
         Route::group(['prefix' => '/copy','as' => 'copies.'],function(){
             Route::get('/getLoanList',[BookController::class, 'getBookCopyLoansList'])->name('getLoanList');
@@ -114,6 +116,14 @@ Route::group(['prefix' => 'invoices', 'as' => 'invoices.'], function(){
         Route::patch('/',[PaymentController::class,'update'])->name('update');
         Route::delete('/',[PaymentController::class,'delete'])->name('delete');
         Route::get('/',[PaymentController::class,'index'])->name('index');
+    });
+
+    Route::group(['prefix'=>'pricing','as'=>'pricing.'],function (){
+       Route::post('/',[PricingController::class,'store'])->name('store');
+       Route::patch('/',[PricingController::class,'update'])->name('update');
+       Route::delete('/',[PricingController::class,'destroy'])->name('destroy');
+        Route::post('/list',[PricingController::class,'pricingList'])->name('list');
+       Route::get('/',[PricingController::class,'index'])->name('index');
     });
 
 Route::get('/',[DashboardController::class,'index'])->name('dashboard');

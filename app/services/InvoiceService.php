@@ -132,13 +132,14 @@ class InvoiceService
         try {
             $$result = DB::table('invoices')->insert([
                 'member_id' => $data['member_id'],
-                'status_id' => 9,
+                'status_id' => 10,
                 'invoice_type' => $data['invoice_type'],
                 'invoice_date' => $data['invoice_date'],
                 'total_amount' => $data['amount'],
                 'open_amount' => $data['amount'],
                 'paid' => false,
                 'paid_date' => null,
+                'description' => $data['description'],
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString()
             ]);

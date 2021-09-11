@@ -140,6 +140,7 @@ create view invoice_info as
            i.open_amount,
            i.invoice_date,
            i.status_id,
+           description,
            CONCAT(invoice_date, ' $', total_amount) as 'name',
            s.name as 'status',
            i.paid,
@@ -161,3 +162,17 @@ create view payment_info as
     from payments p
         left join invoices i on p.invoice_id = i.id
         left join member_info m on i.member_id = m.id;
+
+
+drop view if exists pricing_info;
+create view pricing_info as
+    select p.id as 'id',
+           p.name as'name',
+           pt.name as 'pricing_type',
+           p.pricing_type_id,
+           p.membership_type_id,
+           mt.name as 'membership_type',
+           p.amount,
+           p.amount_per_day
+    from pricing p left join pricing_types pt on p.pricing_type_id = pt.id
+    left join membership_types mt on p.membership_type_id = mt.id;

@@ -78,9 +78,9 @@ class AuthorController extends CommonController
             'updated_at' => Carbon::now()->toDateTimeString()
         ]);
         if($result){
-            return response(['message' => 'Author Stored'],201);
+            return response(['message' => trans('common.author_stored_label')],201);
         }
-        return response(['message' => 'Something went wrong'],401);
+        return response(['message' => trans('common.general_error_label')],401);
     }
 
     public function update(Request $request){
@@ -91,9 +91,9 @@ class AuthorController extends CommonController
         ]);
         $result = Author::where('id','=',$data['author_id'])->update(['name' =>$data['name'],'gender_id'=>$data['gender']]);
         if($result){
-            return response(['message' => 'Author updated'],201);
+            return response(['message' => trans('common.author_updated')],201);
         }
-        return response(['message' => 'something went wrong'],401);
+        return response(['message' => trans('common.general_error_label')],401);
     }
 
     public function destroy(Request $request){
@@ -103,9 +103,9 @@ class AuthorController extends CommonController
 
         $result = DB::table('authors')->where('id','=',$data['author_id'])->delete();
         if($result){
-            return response(['message' => 'Author removed'],201);
+            return response(['message' => trans('common.author_removed_label')],201);
         }
-        return response(['message' => 'Something went wrong'],401);
+        return response(['message' => trans('common.general_error_label')],401);
 
     }
 

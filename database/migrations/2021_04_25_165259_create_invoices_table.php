@@ -17,6 +17,7 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->foreignId('member_id')->constrained('members')->cascadeOnDelete();
             $table->foreignId('status_id')->constrained('status')->cascadeOnDelete();
+            $table->text('description')->nullable()->default(null);
             $table->date('invoice_date');
             $table->decimal('total_amount',12,2);
             $table->decimal('open_amount',12,2);

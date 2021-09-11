@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between">
-                    <h4 class="font-weight-bold text-primary pl-2 pt-2">Book Copies</h4>
+                    <h4 class="font-weight-bold text-primary pl-2 pt-2">{{trans('common.book_copies_list_label')}}</h4>
                     <div class="pb-2">
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddBookCopy(event)" style="border-radius: 10px">
-                            Add Book Copy
+                            {{trans('common.books_add_copy_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -17,12 +17,12 @@
             <div class="card  px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="row pl-2 mb-3">
-                        <div class="col">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
                             <div class="form-group row">
-                                <label for="status_filter" class="col-form-label font-weight-bold">Filter By Status</label>
                                 <div class="col">
+                                    <label for="status_filter" class="col-form-label font-weight-bold">{{trans('common.filter_by_status_label')}}</label>
                                     <select type="text" id="status_filter" name="status" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.all_label')}}</option>
                                         @foreach($data['statuses'] as $status)
                                             <option value="{{$status->id}}">{{$status->name}}</option>
                                         @endforeach
@@ -30,12 +30,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
                             <div class="form-group row">
-                                <label for="condition_filter" class="col-form-label font-weight-bold">Filter By Condition</label>
                                 <div class="col">
+                                    <label for="condition_filter" class="col-form-label font-weight-bold">{{trans('common.filter_by_condition_label')}}</label>
                                     <select type="text" id="condition_filter" name="condition" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.all_label')}}</option>
                                         @foreach($data['conditions'] as $condition)
                                             <option value="{{$condition->id}}">{{$condition->name}}</option>
                                         @endforeach
@@ -43,26 +43,34 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <button class="btn btn-primary text-light font-weight-bold" id="filterBtn">
-                                Filter
-                                <i class="fas fa-filter ml-1"></i>
-                            </button>
-                            <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
-                                Clear
-                                <i class="fas fa-ban ml-1"></i>
-                            </button>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5 d-flex flex-column justify-content-center">
+                            <div class="row pt-4">
+                                <button class="btn btn-primary mr-1 text-light font-weight-bold" id="filterBtn">
+                                    {{trans('common.filter_label')}}
+                                    <i class="fas fa-filter ml-1"></i>
+                                </button>
+                                <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
+                                    {{trans('common.clear_label')}}
+                                    <i class="fas fa-ban ml-1"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>UUID</th>
-                                <th>Title</th>
-                                <th>Condition</th>
-                                <th>Status</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-qrcode text-primary"></i></span>
+                                    {{trans('common.barcode_label')}}
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-book text-primary"></i></span>
+                                    {{trans('common.book_label')}}
+                                </th>
+                                <th>{{trans('common.book_copy_condition_label')}}</th>
+                                <th>{{trans('common.book_copy_status_label')}}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -76,16 +84,17 @@
     </div>
 
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Book Copy</h5>
+                    <h5 class="modal-title" id="addModalLabel">{{trans('common.books_add_copy_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
                 </div>
                 <form method="post" action="#" id="addForm">
                     @csrf
+                    <input type="hidden" id="add_status" name="status_id" value="1">
                     <div class="modal-body px-3 py-2">
                         <div class="form-row">
                             <div class="col">
@@ -97,54 +106,58 @@
                                                 <i class="fas fa-qrcode text-primary"></i>
                                             </div>
                                         </div>
-                                        <input type="text" id="add_uid" name="uid" class="form-control">
+                                        <input type="text" id="add_uid" placeholder="{{trans('common.enter_unique_code_label')}}" name="uid" class="form-control">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_book" class="font-weight-bold">Book <span class="text-danger">*</span></label>
-                                    <select id="add_book" name="book_id" class="form-control"></select>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_condition" class="font-weight-bold">Condition <span class="text-danger">*</span></label>
+                                    <label for="add_book" class="font-weight-bold">{{trans('common.book_label')}} <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text bg-white">
+                                                <i class="fas fa-book text-primary"></i>
+                                            </div>
+                                        </div>
+                                        <select id="add_book" name="book_id" class="form-control"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="add_condition" class="font-weight-bold">{{trans('common.book_copy_condition_label')}} <span class="text-danger">*</span></label>
                                     <select id="add_condition" name="condition_id" class="form-control">
-                                        <option value="0">Select Condition</option>
+                                        <option value="0">{{trans('common.select_condition_label')}}</option>
                                         @foreach($data['conditions'] as $condition)
                                             <option value="{{$condition->id}}">{{$condition->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="add_status" class="font-weight-bold">Status <span class="text-danger">*</span></label>
-                                    <select id="add_status" name="status_id" class="form-control">
-                                        <option value="0">Select status</option>
-                                        @foreach($data['statuses'] as $status)
-                                            <option value="{{$status->id}}">{{$status->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="add_for_sale" class="font-weight-bold">For sale <span class="text-danger">*</span></label>
+                                    <label for="add_for_sale" class="font-weight-bold">{{trans('common.book_copy_for_sale_label')}}<span class="text-danger">*</span></label>
                                     <select id="add_for_sale" name="for_sale" class="form-control">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1">{{trans('common.yes_label')}}</option>
+                                        <option value="0">{{trans('common.no_label')}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary col-lg-2 col-md-3 col-sm-5">Yes</button>
-                        <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success col-lg-3 col-md-3 col-sm-5">
+                            <i class="fa fa-save mr-1"></i>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger col-lg-3 col-md-3 col-sm-5" data-dismiss="modal">
+                            {{trans('common.cancel_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -155,7 +168,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="detailsModal">Book copy details</h5>
+                    <h5 class="modal-title" id="detailsModal">{{trans('common.book_copy_details_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -164,28 +177,28 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary mr-2">Book Title: </div>
+                                <div class="font-weight-bold text-secondary mr-2">{{trans('common.book_title_label')}}: </div>
                                 <span id="copy_title"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary mr-2">BarCode: </div>
+                                <div class="font-weight-bold text-secondary mr-2">{{trans('common.barcode_label')}}: </div>
                                 <span id="copy_barcode"></span>
                             </div>
 
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary mr-2">Status: </div>
+                                <div class="font-weight-bold text-secondary mr-2">{{trans('common.book_copy_status_label')}}: </div>
                                 <span id="copy_status"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary mr-2">Author: </div>
+                                <div class="font-weight-bold text-secondary mr-2">{{trans('common.author_label')}}: </div>
                                 <span id="copy_author"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary mr-2">Condition: </div>
+                                <div class="font-weight-bold text-secondary mr-2">{{trans('common.book_copy_condition_label')}}: </div>
                                 <span id="copy_condition"></span>
                             </div>
                         </div>
@@ -193,14 +206,14 @@
                     <div class="row mt-4">
                         <div class="col-12">
                             <div class="fix-topbar">
-                                <h4 class="font-weight-bold text-dark">Loans</h4>
-                                <table id="loan_table" class="table table-bordered table-hover">
+                                <h4 class="font-weight-bold text-dark">{{trans('common.loans_label')}}</h4>
+                                <table id="loan_table" class="table border-right border-left border-bottom">
                                     <thead>
                                     <tr class="text-dark">
                                         <th>Id</th>
-                                        <th>Member</th>
-                                        <th>Period</th>
-                                        <th>Status</th>
+                                        <th>{{trans('common.member_label')}}</th>
+                                        <th>{{trans('common.period_label')}}</th>
+                                        <th>{{trans('common.book_copy_status_label')}}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -208,6 +221,10 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer mt-3 border-top-0">
+                        <button type="button" class="btn btn-secondary col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">
+                            {{trans('common.close_label')}}</button>
                     </div>
                 </div>
             </div>
@@ -218,7 +235,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editModalLabel">Edit Book Copy</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{trans('common.books_copy_edit_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -230,7 +247,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_uid" class="font-weight-bold">UUID <span class="text-danger">*</span></label>
+                                    <label for="edit_uid" class="font-weight-bold">{{trans('common.barcode_label')}} <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
@@ -243,7 +260,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_book" class="font-weight-bold">Book <span class="text-danger">*</span></label>
+                                    <label for="edit_book" class="font-weight-bold">{{trans('common.book_label')}} <span class="text-danger">*</span></label>
                                     <select id="edit_book" name="book_id" class="form-control"></select>
                                 </div>
                             </div>
@@ -251,9 +268,9 @@
                         <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_condition" class="font-weight-bold">Condition <span class="text-danger">*</span></label>
+                                    <label for="edit_condition" class="font-weight-bold">{{trans('common.book_copy_condition_label')}} <span class="text-danger">*</span></label>
                                     <select id="edit_condition" name="condition_id" class="form-control">
-                                        <option value="0">Select Condition</option>
+                                        <option value="0">{{trans('common.select_condition_label')}}</option>
                                         @foreach($data['conditions'] as $condition)
                                             <option value="{{$condition->id}}">{{$condition->name}}</option>
                                         @endforeach
@@ -262,9 +279,9 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_status" class="font-weight-bold">Status <span class="text-danger">*</span></label>
+                                    <label for="edit_status" class="font-weight-bold">{{trans('common.book_copy_status_label')}} <span class="text-danger">*</span></label>
                                     <select id="edit_status" name="status_id" class="form-control">
-                                        <option value="0">Select status</option>
+                                        <option value="0">{{trans('common.select_status_label')}}</option>
                                         @foreach($data['statuses'] as $status)
                                             <option value="{{$status->id}}">{{$status->name}}</option>
                                         @endforeach
@@ -273,18 +290,19 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="edit_for_sale" class="font-weight-bold">For sale <span class="text-danger">*</span></label>
+                                    <label for="edit_for_sale" class="font-weight-bold">{{trans('common.book_copy_for_sale_label')}}<span class="text-danger">*</span></label>
                                     <select id="edit_for_sale" name="for_sale" class="form-control">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1">{{trans('common.yes_label')}}</option>
+                                        <option value="0">{{trans('common.no_label')}}</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary col-lg-2 col-md-3 col-sm-5">Yes</button>
-                        <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-primary col-lg-2 col-md-3 col-sm-5">{{trans('common.save_label')}}</button>
+                        <button type="button" class="btn btn-danger col-lg-2 col-md-3 col-sm-5" data-dismiss="modal">
+                            {{trans('common.cancel_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -295,7 +313,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="removeModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="removeModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -309,15 +327,18 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-2 text-dark">
-                                Are you sure you want to remove this Book Copy:<br>
+                                {{trans('common.confirm_copy_delete_label')}}:<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_copy"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">
+                            <span class="mr-1"><i class="fa fa-trash"></i></span>
+                            {{trans('common.yes_label')}}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.cancel_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -351,6 +372,7 @@
             const filterBtn = $('#filterBtn')
             const clearBtn = $('#clearBtn')
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -366,7 +388,7 @@
                     { data: 'id', name: 'id' },
                     { data: 'uid', name: 'uid'},
                     { data: 'title', name: 'title'},
-                    { data: 'condition',name: 'condition'},
+                    { data: 'condition_info',name: 'condition_info'},
                     { data: 'book_status',name: 'book_status'},
                     { data:'actions', name:'actions', orderable: false, searchable: false}
                 ]
@@ -462,7 +484,7 @@
             const status = $('#add_status')
             book.select2({
                 theme: 'bootstrap4',
-                placeholder: 'Select a book',
+                placeholder: '{{trans('common.select_book_label')}}',
                 ajax: {
                     url: '{!! route('books.list') !!}',
                     type: 'post',
@@ -613,6 +635,7 @@
                         author.html(`${book.author}`)
                         condition.html(`${book.condition}`)
                         datatable.DataTable({
+                            language: datatableTrans,
                             processing: true,
                             serverSide: true,
                             autoWidth: false,
@@ -653,11 +676,6 @@
             book.val('')
             book.removeClass('is-valid')
             book.removeClass('is-invalid')
-
-            let condition = $('#add_condition')
-            condition.val(0)
-            condition.removeClass('is-valid')
-            condition.removeClass('is-invalid')
 
             let status = $('#add_status')
             status.val(0)

@@ -17,7 +17,7 @@
             <div class="card px-1 pt-1 rounded-lg">
                 <div class="card-body">
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered table-hover display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
@@ -242,6 +242,7 @@
         $(document).ready(function(){
             let statusId = 0
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],

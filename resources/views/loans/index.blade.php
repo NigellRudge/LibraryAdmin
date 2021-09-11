@@ -43,14 +43,26 @@
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered display compact nowrap">
+                        <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>Book</th>
-                                <th>Name</th>
-                                <th>Loan Date</th>
-                                <th>Expected Date</th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-book text-primary"></i></span>
+                                    Book
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-user text-primary"></i></span>
+                                    Member
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-calendar text-primary"></i></span>
+                                    Loan Date
+                                </th>
+                                <th>
+                                    <span class="mr-1"><i class="fa fa-calendar-check text-primary"></i></span>
+                                    Expected Date
+                                </th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
@@ -89,8 +101,11 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fa fa-trash mr-1"></i>
+                            Delete
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     </div>
                 </form>
             </div>
@@ -114,8 +129,8 @@
                                 <label for="add_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-user text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-user text-primary"></i>
                                         </div>
                                     </div>
                                     <select name="member_id" id="add_member" class="form-control"></select>
@@ -127,8 +142,8 @@
                                 <label for="add_book_item_id" class="text-dark font-weight-bold">Book<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-book text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-book text-primary"></i>
                                         </div>
                                     </div>
                                 <select name="book_item_id" id="add_book_item_id" class="form-control"></select>
@@ -140,8 +155,8 @@
                                 <label for="add_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-calendar text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-calendar text-primary"></i>
                                         </div>
                                     </div>
                                     <input name="loan_date" id="add_loan_date" class="form-control" />
@@ -150,8 +165,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save mr-1"></i>
+                            Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -176,8 +194,8 @@
                                 <label for="edit_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-user text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-user text-primary"></i>
                                         </div>
                                     </div>
                                     <select name="member_id" id="edit_member" class="form-control"></select>
@@ -189,8 +207,8 @@
                                 <label for="edit_book_item_id" class="text-dark font-weight-bold">Book<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-book text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-book text-primary"></i>
                                         </div>
                                     </div>
                                     <select name="book_item_id" id="edit_book_item_id" class="form-control"></select>
@@ -202,8 +220,8 @@
                                 <label for="edit_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-calendar text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-calendar text-primary"></i>
                                         </div>
                                     </div>
                                     <input name="loan_date" id="edit_loan_date" class="form-control" />
@@ -212,8 +230,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="editSubmitBtn">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save mr-1"></i>
+                            Save
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </form>
             </div>
@@ -240,11 +261,11 @@
                                 <label for="process_member_name" class="font-weight-bold text-dark">Member</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-user text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-user text-primary"></i>
                                         </div>
                                     </div>
-                                <input type="text" class="form-control" id="process_member_name" name="process_member_name" readonly></div>
+                                <input type="text" class="form-control bg-white" id="process_member_name" name="process_member_name" readonly></div>
                             </div>
                         </div>
                         <div class="form-row">
@@ -252,11 +273,11 @@
                                 <label for="process_book_title" class="font-weight-bold text-dark">Book</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-book text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-book text-primary"></i>
                                         </div>
                                     </div>
-                                <input type="text" id="process_book_title" name="process_book_title" class="form-control" readonly>
+                                <input type="text" id="process_book_title" name="process_book_title" class="form-control bg-white" readonly>
                                 </div>
                             </div>
                         </div>
@@ -265,11 +286,11 @@
                                 <label for="process_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-calendar text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-calendar text-primary"></i>
                                         </div>
                                     </div>
-                                    <input type="text" id="process_loan_date" readonly name="loan_date" class="form-control">
+                                    <input type="text" id="process_loan_date" readonly name="loan_date" class="form-control bg-white">
                                 </div>
                             </div>
                         </div>
@@ -278,8 +299,8 @@
                                 <label for="process_return_date" class="text-dark font-weight-bold">Return Date<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fa fa-calendar text-dark"></i>
+                                        <div class="input-group-text bg-white">
+                                            <i class="fa fa-calendar text-primary"></i>
                                         </div>
                                     </div>
                                     <input type="text" id="process_return_date"  name="return_date" class="form-control">
@@ -288,7 +309,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            Save
+                        </button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -386,6 +410,7 @@
         $(document).ready(()=>{
             let categoryId = 0;
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],
@@ -538,6 +563,7 @@
 
             $('#add_member').select2({
                 theme: 'bootstrap4',
+                placeholder:'Select Member',
                 ajax: {
                     url: '{!! route('members.list') !!}',
                     type: 'post',
@@ -568,6 +594,7 @@
             });
             $('#add_book_item_id').select2({
                 theme: 'bootstrap4',
+                placeholder:'Select Book',
                 ajax: {
                     url: '{!! route('books.copies.list') !!}',
                     type: 'post',

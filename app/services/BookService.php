@@ -16,7 +16,7 @@ class BookService
 {
 
     public function getBooks(array $filterOptions = null){
-        $books = DB::table('book_info')->select('id','title','author','isbn','cover','num_copies');
+        $books = DB::table('book_info')->select('id','title','author','isbn','cover','num_copies', 'num_pages');
         return $books->get();
     }
 

@@ -22,7 +22,7 @@ class DashboardController extends CommonController
     public function getData(){
         $this->data['total_members'] = DB::table('members')->where('status_id','=',7)->count();
         $this->data['total_books'] = DB::table('books')->count();
-        $this->data['open_invoices'] = DB::table('invoices')->where('status_id','=',9)->count();
+        $this->data['open_invoices'] = DB::table('invoices')->where('status_id','=',10)->count();
         $this->data['pending_requests'] = DB::table('membership_requests')->where('status_id','=',3)->count();
     }
 }

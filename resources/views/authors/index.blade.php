@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                        <h4 class="font-weight-bold text-primary pl-2">Authors</h4>
+                        <h4 class="font-weight-bold text-primary pl-2">{{trans('common.authors_label')}}</h4>
                     <div>
                         <button class="btn btn-primary py-2  font-weight-bold text-white" onclick="AddAuthor(event)" style="border-radius: 10px">
-                            Add Author
+                            {{trans('common.add_author_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -20,10 +20,10 @@
                     <div class="row pl-2 mb-2">
                         <div class="col d-flex">
                             <div class="form-group row">
-                                <label for="filter_member_type" class="col-form-label font-weight-bold">Filter By Gender</label>
+                                <label for="filter_member_type" class="col-form-label font-weight-bold">{{trans('common.gender_filter_label')}}</label>
                                 <div class="col">
                                     <select type="text" id="filter_member_type" name="filter_member_type" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.all_label')}}</option>
                                         @foreach($data['genders'] as $gender)
                                             <option value="{{ $gender->id }}">{{$gender->name}}</option>
                                         @endforeach
@@ -33,13 +33,13 @@
                         </div>
                     </div>
                     <div class="fix-topbar">
-                        <table id="datatable" class="table table-bordered" style="width: 100%">
+                        <table id="datatable" class="table border-right border-left border-bottom" style="width: 100%">
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Num Books</th>
+                                <th>{{trans('common.name_label')}}</th>
+                                <th>{{trans('common.gender_label')}}</th>
+                                <th>{{trans('common.num_books_label')}}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -56,7 +56,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -70,15 +70,18 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Author:<br>
+                                {{trans('common.author_delete_confirm_label')}}<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_author"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success">
+                            <span class="mr-1"><i class="fa fa trash"></i></span>
+                            {{trans('common.delete_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{trans('common.cancel_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -191,6 +194,7 @@
         $(document).ready(()=>{
             let categoryId = 0;
             const dataTable = $("#datatable").DataTable({
+                language: datatableTrans,
                 processing: true,
                 serverSide: true,
                 lengthMenu: [10, 25, 50, 75, 100 ],

@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary text-light">
-                <h5 class="modal-title" id="logoutModalLabel">Confirm</h5>
+                <h5 class="modal-title" id="logoutModalLabel">{{trans('common.confirm_label')}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="text-light">&times;</span>
                 </button>
@@ -15,14 +15,14 @@
                             <i class="far fa-question-circle"></i>
                         </div>
                         <div class="pt-4 text-dark pl-2">
-                            Are you sure you want to Logout ?
+                            {{ trans('common.auth_logout_confirm_label') }}
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">{{ trans('common.yes_label') }}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('common.no_label') }}</button>
                 </div>
             </form>
         </div>

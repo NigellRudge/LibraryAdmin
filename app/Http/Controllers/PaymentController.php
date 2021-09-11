@@ -44,9 +44,10 @@ class PaymentController extends CommonController
 
                 })
                 ->addColumn('amount_info', function($row){
-                    return  ' $' . number_format($row->amount,2);
+                    $data = number_format($row->amount,2);
+                    return "<span class='font-weight-bold text-dark'>$</span>$data";
                 })
-                ->rawColumns(['actions'])
+                ->rawColumns(['actions','amount_info'])
                 ->make(true);
         }
 

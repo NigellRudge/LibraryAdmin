@@ -88,9 +88,9 @@ class BookController extends CommonController
         ]);
         $result = $this->bookService->storeBook($data,$request);
         if($result){
-            return redirect(route('books.index'))->with('message','Books Stored');
+            return redirect(route('books.index'))->with('message',trans('common.books_save_success_full_label'));
         }
-        return redirect(route('books.index'))->with('error','Something went wrong');
+        return redirect(route('books.index'))->with('error',trans('common.general_error_label'));
     }
 
     public function edit(Book $book){
@@ -135,8 +135,7 @@ class BookController extends CommonController
     public function show(Request $request, BookInfo $book){
         $this->data['book'] = $book;
         $this->data['categories'] = DB::table('book_category_info')->where('book_id',$book->id)->select('category')->get();
-        $this->data['statuses'] = DB::table('status')->select('id','name')->get();
-        $this->data['conditions'] = DB::table('condition')->select('id','name')->get();
+        $this->data['conditions'] = DB::table('condition')->whereIn('id',[1,2])->select('id','name')->get();
         //dd($this->data);
         return view('books.show')->with('data',$this->data);
     }
@@ -197,7 +196,10 @@ class BookController extends CommonController
                 ->addColumn('book_status',function($row){
                     return $this->getItemStatusColumn($row->status_id,$row->status);
                 })
-                ->rawColumns(['actions','book_status'])
+                ->addColumn('condition_info',function($row){
+                    return $this->getConditionColumn($row->condition_id,$row->condition);
+                })
+                ->rawColumns(['actions','book_status','condition_info'])
                 ->make(true);
         }
         $this->data['statuses'] = DB::table('status')->whereIn('id',[1,2])->select('id','name')->get();
@@ -212,6 +214,7 @@ class BookController extends CommonController
             'condition_id' => 'required',
             'uid' => 'required'
         ]);
+        $data['status_id'] = intval($data['status_id']);
         $result = $this->bookService->storeBookCopy($data);
         if($result){
             return response(['message' => 'Book Copy Stored'],201);
@@ -237,9 +240,9 @@ class BookController extends CommonController
         ]);
         $result = $this->bookService->updateBookCopy($data,$request['copy_id']);
         if($result){
-            return response(['message' => 'Book Copy Stored'],201);
+            return response(['message' => trans('common.books_copy_save_success_full_label')],201);
         }
-        return response(['message' => 'Something went wrong' ],401);
+        return response(['message' => trans('common.general_error_label') ],401);
     }
 
     public function destroyCopy(Request $request){
@@ -248,9 +251,9 @@ class BookController extends CommonController
         ]);
         $result = $this->bookService->deleteBookCopy($data);
         if($result){
-            return response(['message' => 'Book Copy deleted'],201);
+            return response(['message' => trans('common.books_copy_deleted_label')],201);
         }
-        return response(['message' => 'Something went wrong' ],401);
+        return response(['message' => trans('common.general_error_label') ],401);
     }
 
     public function getBookCopyById(Request $request){

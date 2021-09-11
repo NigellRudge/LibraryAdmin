@@ -24,6 +24,8 @@ class ConfigSeeder extends Seeder
            ['name' => 'Paid','code'=>'PAID'],
            ['name' => 'Active','code'=>'ACT'],
            ['name' => 'In-Active','code'=>'IACT'],
+           ['name' => 'Partially paid','code'=>'PPD'],
+           ['name' => 'Open','code'=>'OPN'],
         ]);
         DB::table('loan_status')->insert([
            ['name' => 'Available'],
@@ -41,20 +43,31 @@ class ConfigSeeder extends Seeder
             ['name' => 'single package', 'max_sub_members'=> 0, 'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()],
             ['name' => 'family package', 'max_sub_members'=> 4, 'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()]
         ]);
+        DB::table('pricing_types')->insert([
+            [ 'name' =>'One-time'],
+            [ 'name' =>'Monthly'],
+        ]);
 
         DB::table('pricing')->insert([
-            [ 'name' =>'single pricing', 'membership_type_id'=>1,'amount'=>150,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()],
-            [ 'name' =>'family pricing', 'membership_type_id'=>2,'amount'=>350,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString()]
+            [ 'name' =>'single pricing', 'membership_type_id'=>1,'amount'=>150,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString(), 'pricing_type_id' =>1],
+            [ 'name' =>'family pricing', 'membership_type_id'=>2,'amount'=>350,'created_at'=>Carbon::now()->toDateTimeString(), 'updated_at'=> Carbon::now()->toDateTimeString(), 'pricing_type_id' =>1]
         ]);
 
         DB::table('actions')->insert([
             [ 'name' =>'Approve'],
             [ 'name' =>'Reject'],
         ]);
+
+
         DB::table('invoice_types')->insert([
             [ 'name' =>'Membership Fee'],
             [ 'name' =>'Late fee'],
             [ 'name' =>'Damage fee'],
+        ]);
+
+        DB::table('languages')->insert([
+            [ 'name' =>'English','code'=>'en', 'icon_name' =>'en-flag.gif'],
+            [ 'name' =>'Nederlands','code'=>'nl', 'icon_name' =>'ned-flag.gif']
         ]);
     }
 }

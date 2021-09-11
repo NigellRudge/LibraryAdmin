@@ -37,16 +37,6 @@ class MemberController extends CommonController
                 ->addColumn('actions', function ($row){
                     $showUrl = route('members.show',['member' => $row->id]);
                     $editUrl = route('members.edit',['member' => $row->id]);
-//                    $canDelete = DB::table('book_items')->where('book_id','=',$row->id)->count() > 0;
-//                    if($canDelete){
-//                        return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='$showUrl'
-//                                    data-id='$row->id'>
-//                                <i class='fa fa-eye' data-id='$row->id'></i>
-//                            </a>"
-//                            ."<a class='btn-success btn btn-sm rounded text-white  font-weight-bold mr-1 ' onclick='EditBook(event)' data-id='$row->id'>
-//                                <i class='fa fa-edit' data-id='$row->id'></i>
-//                             </a>";
-//                    }
                     return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='$showUrl'>
                                 <i class='fa fa-eye'></i>
                             </a>"
@@ -121,7 +111,8 @@ class MemberController extends CommonController
      */
     public function show(Request $request, Member $member){
         $this->data['member'] = $member;
-        return view('members.show')->with('data',$this->data);
+        $this->data['invoice_types'] = DB::table('invoice_types')->select('id','name')->get();
+        return view('members.test')->with('data',$this->data);
     }
 
     public function edit(Member $member){
@@ -155,11 +146,8 @@ class MemberController extends CommonController
                 return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
                                 <i class='fa fa-eye'></i>
                             </a>"
-                    ."<a class='btn-success btn btn-sm rounded text-white  font-weight-bold mr-1 ' data-id='$row->id'   onclick='EditMember(event)'>
-                                <i class='fa fa-edit ' data-id='$row->id'></i>
-                             </a>"
-                    ."<a class='btn btn-danger btn-sm rounded text-white font-weight-bold' onclick='DeleteMember(event)'  data-id='$row->id'>
-                                <i class='fa fa-trash' data-id='$row->id'></i>
+                    ."<a class='btn btn-danger btn-sm rounded text-white font-weight-bold' onclick='DeleteLoan(event)'  data-book='$row->book'  data-id='$row->id'>
+                                <i class='fa fa-trash' data-id='$row->id'  data-book='$row->book' ></i>
                              </a>";
 
             })
