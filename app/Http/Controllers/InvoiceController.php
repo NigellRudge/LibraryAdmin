@@ -40,8 +40,8 @@ class InvoiceController extends CommonController
         if($request->ajax()){
             return DataTables::of($this->invoiceService->getInvoices($request->all()))
                 ->addColumn('actions', function ($row){
-                    return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' href='#'>
-                                <i class='fa fa-eye'></i>
+                    return "<a class='btn btn-primary rounded btn-sm text-white font-weight-bold mr-1' onclick='InvoiceDetails(event)' data-id='$row->id'>
+                                <i class='fa fa-eye' data-id='$row->id'></i>
                             </a>"
                         ."<a class='btn-success btn btn-sm rounded text-white  font-weight-bold mr-1 ' onclick='EditInvoice(event)' data-id='$row->id'>
                                 <i class='fa fa-edit ' data-id='$row->id'></i>
@@ -68,7 +68,7 @@ class InvoiceController extends CommonController
         }
         $this->data['types'] = DB::table('invoice_types')->select('id','name')->get();
         $this->data['active_members'] = DB::table('members')->where('status_id',7)->count() > 0;
-        $this->data['invoice_status'] = DB::table('status')->whereIn('id',[6,9])->select('id','name')->get();
+        $this->data['invoice_status'] = DB::table('status')->whereIn('id',[6,9,10])->select('id','name')->get();
         return view('fees.index')->with('data', $this->data);
     }
 
@@ -142,4 +142,18 @@ class InvoiceController extends CommonController
         return response()->json(['invoice' => $invoice],200);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws Exception
+     */
+    public function getPaymentList(Request $request){
+        return DataTables::of($this->invoiceService->getPayments($request->all()))
+            ->addColumn('amount_info', function($row){
+                $data = number_format($row->amount,2);
+                return "<span class='font-weight-bold text-dark'>$</span>$data";
+            })
+            ->rawColumns(['amount_info'])
+            ->make(true);
+    }
 }

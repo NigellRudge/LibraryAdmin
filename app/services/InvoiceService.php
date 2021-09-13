@@ -49,6 +49,7 @@ class InvoiceService
                }
                else{
                    $invoice->open_amount = $invoice->open_amount - $data['amount'];
+                   $invoice->status_id = 9;
                }
                $invoice->save();
             });
@@ -68,7 +69,7 @@ class InvoiceService
             $payment = Payment::findOrFail($paymentId);
             $invoice = Invoice::findOrFail($payment->invoice_id);
             $invoice->open_amount = $invoice->open_amount + $payment->amount;
-            $invoice->status_id = 9;
+            $invoice->status_id = 10;
             $invoice->save();
             $payment->delete();
             return true;
@@ -79,6 +80,9 @@ class InvoiceService
     }
     public function getPayments(array $filterOptions){
         $payments = DB::table('payment_info')->select('*');
+        if(isset($filterOptions['invoiceId']) && $filterOptions['invoiceId'] != 0){
+            $payments = $payments->where('invoice_id','=',$filterOptions['invoiceId']);
+        }
         return $payments;
     }
 

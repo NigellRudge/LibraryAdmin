@@ -156,4 +156,20 @@ return [
     'available_label' => 'Available',
     'on_loan_label' => 'On loan',
     'damaged_label' => 'Damaged',
+
+
+    'personal_info_label' => 'Personal Information',
+    'no_active_member_warning_label' => 'No Active members, can\'t create invoice',
+    'invoice_type_label' => 'Invoice type',
+    'invoice_status' => 'Invoice status',
+    'invoice_delete_confirm_label' => ' Are you sure you want to remove this Invoice:',
+    'edit_invoice_label' => 'Edit Invoice',
+    'invoice_details_label' => 'Invoice Details',
+    'date_label' => 'Date',
+
+    'add_payment_label' => 'Add Payment',
+    'new_payment_label' => 'New payment',
+    'edit_payment_label' => 'Edit payment',
+    'confirm_payment_delete_label' => 'Are you sure you want to remove this Payment:',
+
 ];

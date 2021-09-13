@@ -10,9 +10,9 @@
 <div class="card row mb-1" style="min-height: 400px">
     <div class="card-body d-flex flex-row">
          <div class="nav flex-column nav-pills col-2 border-right" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-             <a class="nav-link active" id="info-tab" data-toggle="pill" href="#info" role="tab" aria-controls="info" aria-selected="true">Personal Info</a>
-             <a class="nav-link" id="loans_tab" data-toggle="pill" href="#loans" role="tab" aria-controls="loans" aria-selected="false">Loans</a>
-             <a class="nav-link" id="invoices-tab" data-toggle="pill" href="#invoices" role="tab" aria-controls="invoices" aria-selected="false">Invoices</a>
+             <a class="nav-link active" id="info-tab" data-toggle="pill" href="#info" role="tab" aria-controls="info" aria-selected="true">{{trans('common.personal_info_label')}}</a>
+             <a class="nav-link" id="loans_tab" data-toggle="pill" href="#loans" role="tab" aria-controls="loans" aria-selected="false">{{trans('common.loans_label')}}</a>
+             <a class="nav-link" id="invoices-tab" data-toggle="pill" href="#invoices" role="tab" aria-controls="invoices" aria-selected="false">{{trans('common.invoices_label')}}</a>
          </div>
          <div class="tab-content col-10" id="v-pills-tabContent">
              <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
@@ -139,11 +139,11 @@
                          <table id="invoice_dataTable" class="table border-right border-left border-bottom display compact nowrap">
                              <thead>
                              <tr class="text-dark">
-                                 <th>Total Amount</th>
-                                 <th>Open Amount</th>
-                                 <th>Status</th>
-                                 <th>Invoice Date</th>
-                                 <th>Type</th>
+                                 <th>{{trans('common.invoice_total_amount_label')}}</th>
+                                 <th>{{trans('common.invoice_open_amount_label')}}</th>
+                                 <th>{{trans('common.book_copy_status_label')}}</th>
+                                 <th>{{trans('common.invoice_date_label')}}</th>
+                                 <th>{{trans('common.type_label')}}</th>
                                  <th></th>
                              </tr>
                              </thead>
@@ -259,8 +259,6 @@
         </div>
     </div>
 
-
-
     <div class="modal fade" id="addInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="addInvoiceModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -363,6 +361,7 @@
         $(document).ready(()=>{
             const invoiceDataTable = $('#invoice_dataTable').DataTable({
                 processing: true,
+                language: datatableTrans,
                 serverSide: true,
                 lengthMenu: [5, 10, 15],
                 pageLength:5,
@@ -384,6 +383,7 @@
             });
             const loanDataTable = $('#loanDatatable').DataTable({
                 processing: true,
+                language: datatableTrans,
                 serverSide: true,
                 lengthMenu: [5, 10, 15],
                 pageLength:5,

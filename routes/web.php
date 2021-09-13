@@ -102,6 +102,7 @@ Route::group(['prefix' => 'loans','as' =>'loans.'],function(){
 
 Route::group(['prefix' => 'invoices', 'as' => 'invoices.'], function(){
     Route::post('/getById',[InvoiceController::class,'getById'])->name('getById');
+    Route::get('/payments',[InvoiceController::class,'getPaymentList'])->name('paymentList');
     Route::post('/list',[InvoiceController::class,'invoiceList'])->name('list');
     Route::post('/',[InvoiceController::class,'store'])->name('store');
     Route::patch('/',[InvoiceController::class,'update'])->name('update');

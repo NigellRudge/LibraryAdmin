@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Payments</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.payments_label')}}</h4>
                     <div>
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddPayment(event)" style="border-radius: 10px">
-                            Add Payment
+                            {{trans('common.add_payment_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -21,10 +21,10 @@
                             <thead>
                             <tr class="text-dark">
                                 <th>Id</th>
-                                <th>Member</th>
-                                <th>Invoice</th>
-                                <th>Date</th>
-                                <th>Amount</th>
+                                <th>{{trans('common.member_label')}}</th>
+                                <th>{{trans('common.invoice_label')}}</th>
+                                <th>{{trans('common.date_label')}}</th>
+                                <th>{{trans('common.amount_label')}}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -41,7 +41,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Make Payment</h5>
+                    <h5 class="modal-title" id="addModalLabel">{{trans('common.new_payment_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -51,7 +51,7 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col">
-                                <label for="add_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
+                                <label for="add_member" class="text-dark font-weight-bold">{{trans('common.member_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="add_invoice" class="text-dark font-weight-bold">Invoice<span class="text-danger">*</span></label>
+                                <label for="add_invoice" class="text-dark font-weight-bold">{{trans('common.invoice_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="add_date" class="text-dark font-weight-bold">Date<span class="text-danger">*</span></label>
+                                <label for="add_date" class="text-dark font-weight-bold">{{trans('common.date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="add_amount" class="text-dark font-weight-bold">Amount<span class="text-danger">*</span></label>
+                                <label for="add_amount" class="text-dark font-weight-bold">{{trans('common.amount_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -103,8 +103,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="saveBtn" disabled>Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success" id="saveBtn" disabled>
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="mr-1"><i class="fa fa-ban"></i></span>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -115,7 +121,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editModalLabel">Edit Payment</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{trans('common.edit_payment_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -126,7 +132,7 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col">
-                                <label for="edit_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
+                                <label for="edit_member" class="text-dark font-weight-bold">{{trans('common.member_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -139,7 +145,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="edit_invoice" class="text-dark font-weight-bold">Invoice<span class="text-danger">*</span></label>
+                                <label for="edit_invoice" class="text-dark font-weight-bold">{{trans('common.invoice_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -152,7 +158,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="edit_date" class="text-dark font-weight-bold">Date<span class="text-danger">*</span></label>
+                                <label for="edit_date" class="text-dark font-weight-bold">{{trans('common.date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -165,7 +171,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="edit_amount" class="text-dark font-weight-bold">Amount<span class="text-danger">*</span></label>
+                                <label for="edit_amount" class="text-dark font-weight-bold">{{trans('common.amount_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -178,8 +184,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" id="editSaveBtn">Save</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-success" id="editSaveBtn">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.save_label')}}
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="mr-1"><i class="fa fa-ban"></i></span>
+                            {{trans('common.no_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -190,7 +202,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -204,15 +216,18 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Payment:<br>
+                                {{trans('common.confirm_payment_delete_label')}}<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_payment"></div> ?
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Yes</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <button type="submit" class="btn btn-danger">
+                            <span class="mr-1"><i class="fa fa-trash"></i></span>
+                            {{trans('common.yes_label')}}
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.no_label')}}</button>
                     </div>
                 </form>
             </div>

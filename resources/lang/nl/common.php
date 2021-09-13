@@ -62,7 +62,7 @@ return [
 
     'type_label' => 'Type',
     'select_invoice_type_label' => 'Selecteer factuur type',
-    'invoice_amount_label' => 'bedrag',
+    'invoice_amount_label' => 'Bedrag',
     'invoice_description_label' => 'Omschrijving',
     'invoice_description_placeholder_label' => 'Factuur omschrijving',
     'books_deleted_label' => 'Boek verwijderd',
@@ -134,7 +134,7 @@ return [
     'add_price_label' => 'Prijs toevoegten',
     'description_label' => 'Beschrijvingen',
     'amount_per_day_label' => 'Late fee (per day)',
-    'amount_label' => 'bedrag',
+    'amount_label' => 'Bedrag',
     'pricing_type_label' => 'Prijs type',
     'membership_type_label' => 'Lidmaatschap type',
 
@@ -150,4 +150,19 @@ return [
     'add_author_label' => 'Schrijver toevoegen',
     'gender_filter_label' => 'Filtreren op geslacht',
     'author_delete_confirm_label' => 'Bent u zeker dat u deze schrijver wilt verwijderen:',
+
+    'personal_info_label' => 'Persoonlijke informatie',
+    'no_active_member_warning_label' => 'Geen actieve leden, geen facturen kunnen worden aangemaakt',
+    'invoice_type_label' => 'Factuur type',
+    'invoice_status' => 'Factuur status',
+    'invoice_delete_confirm_label' => 'Bent u zeker dat u dit factuur wilt verwijderen:',
+    'edit_invoice_label' => 'Factuur aanpassen',
+    'invoice_details_label' => 'Factuur Informatie',
+    'date_label' => 'Datum',
+
+    'add_payment_label' => 'Betaling toevoegen',
+    'new_payment_label' => 'Nieuwe betaling',
+    'edit_payment_label' => 'Betaling aanpassen',
+    'confirm_payment_delete_label' => 'Bent u zeker dan u de betaling wilt verwijderen:',
+
 ];
