@@ -112,7 +112,7 @@ return [
     'application_delete_confirm_label' => 'Are you sure you want to remove this Membership application',
     'application_info_labels' => "Application info",
     'application_process_label' => 'Process Application',
-    'loans_label' => 'Loans',
+    'loans_label' => 'Lent books',
     'period_label' => 'Period',
     'loan_date_label' => 'Loan date',
     'loan_return_date_label' => 'Return date',
@@ -125,7 +125,6 @@ return [
     'add_loan_label' => 'Add Loan',
     'loan_date' => 'Loan date',
     'return_date_label' => 'Return date',
-    'confirm_loan_delete_label' => 'Are you sure you want to remove this Loan',
 
     'pricings_label' => 'Pricing',
     'config_label' => 'Config',
@@ -172,4 +171,13 @@ return [
     'edit_payment_label' => 'Edit payment',
     'confirm_payment_delete_label' => 'Are you sure you want to remove this Payment:',
 
+    'lend_book_label' => 'Lend book',
+    'return_book_label' => 'Return book',
+    'lend_date_label' => 'Lend date',
+    'expected_return_label' => 'Expected return date',
+    'confirm_loan_delete_label' => 'Are you sure you want to remove this Loan:',
+    'loan_saved_label' => '',
+    'edit_loan_label' => 'Edit Loan',
+
+    'lend_label' => 'Lending'
 ];

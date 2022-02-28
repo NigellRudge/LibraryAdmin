@@ -60,7 +60,7 @@
                         <table id="datatable" class="table  border-right border-left border-bottom display compact nowrap">
                             <thead>
                             <tr class="text-dark">
-                                <th>Id</th>
+                                <th style="width: 50px;">Id</th>
                                 <th>
                                     <span class="mr-1"><i class="fa fa-qrcode text-primary"></i></span>
                                     {{trans('common.barcode_label')}}
@@ -69,9 +69,9 @@
                                     <span class="mr-1"><i class="fa fa-book text-primary"></i></span>
                                     {{trans('common.book_label')}}
                                 </th>
-                                <th>{{trans('common.book_copy_condition_label')}}</th>
-                                <th>{{trans('common.book_copy_status_label')}}</th>
-                                <th></th>
+                                <th style="width: 60px">{{trans('common.book_copy_condition_label')}}</th>
+                                <th style="width: 80px">{{trans('common.book_copy_status_label')}}</th>
+                                <th style="width: 120px"></th>
                             </tr>
                             </thead>
                             <tbody>

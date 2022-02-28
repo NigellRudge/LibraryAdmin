@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('body')
-    <div id="content-wrapper" class="d-flex flex-column bg-primary">
+    <div id="content-wrapper" class="d-flex flex-column bg-gradient-primary">
         <div id="content">
             <div class="container-fluid">
                 <div class="row d-flex align-items-center" style="min-height: 100vh">

@@ -13,7 +13,7 @@
                     <span class="mr-2">
                         <img src="{{Session::get('lang_icon')}}" width="28" height="20" alt="flag">
                     </span>
-                    <span class="mr-2 d-none d-lg-inline font-weight-bold text-gray-600 text-xl" >{{Session::get('lang_name')}}</span>
+                    <span class="mr-2 d-none d-lg-inline font-weight-bold text-dark text-xl" >{{Session::get('lang_name')}}</span>
                 </div>
             </a>
             <!-- Dropdown - User Information -->
@@ -23,8 +23,11 @@
         @auth
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 text-xl">{{ Auth::user()->name }}</span>
-                <i class="ml-1 fa fa-user-tie text-dark fa-2x"></i>
+                <span class="mr-3 d-flex justify-content-center align-items-center">
+                    <i class="fa fa-user-tie text-primary" style="font-size: 1.5rem"></i>
+                </span>
+                <span class="d-none d-lg-inline text-dark font-weight-bold text-xl">{{ Auth::user()->name }}</span>
+
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

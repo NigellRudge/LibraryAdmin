@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-end">
+                            <div class="card-footer d-flex justify-content-end bg-white border-top-0">
                                 <button type="submit" class="btn btn-success col-lg-2 col-md-3 col-sm-5 mr-2">
                                     <i class="fa fa-save mr-2"></i>
                                     {{trans('common.save_label')}}

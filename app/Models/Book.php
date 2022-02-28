@@ -19,4 +19,8 @@ class Book extends Model
       'publication_date' => DateCast::class
     ];
     use HasFactory;
+
+    public function categories(){
+        return $this->hasMany(BookCategory::class);
+    }
 }

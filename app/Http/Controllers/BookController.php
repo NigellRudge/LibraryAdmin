@@ -35,7 +35,7 @@ class BookController extends CommonController
      */
     public function index(Request $request){
         if($request->ajax()){
-            return DataTables::of($this->bookService->getBooks())
+            return DataTables::of($this->bookService->getBooks($request->all()))
                 ->addColumn('actions', function ($row){
                     $showUrl = route('books.show',['book' => $row->id]);
                     $editUrl = route('books.edit',['book' => $row->id]);

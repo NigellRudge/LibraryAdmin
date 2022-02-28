@@ -55,12 +55,12 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLoans" aria-expanded="true" aria-controls="collapseLoans">
             <i class="fas fa-fw fa-book {{strtolower($data['category_name']) === 'loans' ? 'text-warning': '' }}"></i>
-            <span class="{{strtolower($data['category_name']) === 'loans' ? 'font-weight-bold text-white': '' }}">{{trans('common.loans_label')}}</span>
+            <span class="{{strtolower($data['category_name']) === 'loans' ? 'font-weight-bold text-white': '' }}">{{trans('common.lend_label')}}</span>
         </a>
         <div id="collapseLoans" class="collapse {{strtolower($data['category_name']) === 'loans' ? 'show': '' }}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('loans.index') }}">
-                    <i class="fa fa-users mr-1 text-primary"></i>
+                    <i class="fa fa-book-open mr-1 text-primary"></i>
                     {{trans('common.loans_label')}}
                 </a>
 

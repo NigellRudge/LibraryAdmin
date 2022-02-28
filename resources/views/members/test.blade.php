@@ -107,7 +107,7 @@
                  </div>
                  <div class="row">
                      <div class="col">
-                         <table id="loanDatatable" class="table border-right border-left border-bottom display compact nowrap">
+                         <table id="loanDatatable" class="table border-right border-left text-dark border-bottom display compact nowrap">
                              <thead>
                              <tr>
                                  <th>{{trans('common.book_title_label')}}</th>

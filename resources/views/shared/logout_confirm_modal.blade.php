@@ -21,7 +21,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">{{ trans('common.yes_label') }}</button>
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i>
+                        {{ trans('common.yes_label') }}
+                    </button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('common.no_label') }}</button>
                 </div>
             </form>

@@ -105,11 +105,13 @@ create view membership_request_info as
            mt.name as 'membership_type',
            s.name as 'status',
            m.picture as 'member_picture',
+           g.name as 'gender',
            request_date,
            if(processed_date is null,'Not processed yet',request_date) as 'processed_date',
            membership_type_id
     from membership_requests r left join member_info m on r.member_id = m.id
         left join membership_types mt on r.membership_type_id = mt.id
+        left join genders g on m.gender_id  = g.id
         left join status s on r.status_id = s.id;
 
 

@@ -97,10 +97,7 @@ class LoanController extends CommonController
             Loan::create($data);
 
         });
-//        if($result){
-            return response(['message' => 'Loan deleted'],201);
-//        }
-//        return response(['message' => 'Something went wrong' ],401);sx
+            return response(['message' => trans('common.loan_saved_label')],201);
     }
 
     public function update(Request $request){

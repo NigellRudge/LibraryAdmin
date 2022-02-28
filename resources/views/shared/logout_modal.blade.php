@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary text-light">
-                <h5 class="modal-title" id="logoutModalLabel">Confirm</h5>
+                <h5 class="modal-title" id="logoutModalLabel">Confirm dsds</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" class="text-light">&times;</span>
                 </button>
@@ -22,8 +22,11 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-sign-out-alt" onclick="OpenLogOutModal(event)"></i>
+                        {{trans('common.yes_label')}}
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{trans('common.no_label')}}</button>
                 </div>
             </form>
         </div>

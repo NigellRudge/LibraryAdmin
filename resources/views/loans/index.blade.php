@@ -5,10 +5,10 @@
         <div class="container justify-content-center col">
             <div class="row">
                 <div class="col d-flex justify-content-between py-2">
-                    <h4 class="font-weight-bold text-primary pl-2">Loans</h4>
+                    <h4 class="font-weight-bold text-primary pl-2">{{trans('common.loans_label')}}</h4>
                     <div>
                         <button class="btn btn-primary py-2 font-weight-bold text-white" onclick="AddLoan(event)" style="border-radius: 10px">
-                            Add Loan
+                            {{trans('common.lend_book_label')}}
                             <i class="ml-1 fas fa-plus"></i>
                         </button>
                     </div>
@@ -20,10 +20,10 @@
                     <div class="row pl-2 mb-3">
                         <div class="col-xl-3 col-lg-4 col-4 col-sm-5">
                             <div class="form-group row">
-                                <label for="status_filter" class="col-form-label font-weight-bold">Filter By status</label>
+                                <label for="status_filter" class="col-form-label font-weight-bold">{{trans('common.filter_by_status_label')}}</label>
                                 <div class="col">
                                     <select type="text" id="status_filter" name="status_filter_id" class="form-control">
-                                        <option value="0">All</option>
+                                        <option value="0">{{trans('common.all_label')}}</option>
                                         @foreach($data['loan_status_types'] as $type)
                                             <option value="{{ $type->id }}">{{ $type->name }}</option>
                                         @endforeach
@@ -33,11 +33,11 @@
                         </div>
                         <div class="col">
                             <button class="btn btn-primary text-light font-weight-bold" id="filterBtn">
-                                Filter
+                                {{trans('common.filter_label')}}
                                 <i class="fas fa-filter ml-1"></i>
                             </button>
                             <button class="btn btn-danger text-light font-weight-bold" id="clearBtn">
-                                Clear
+                                {{trans('common.clear_label')}}
                                 <i class="fas fa-ban ml-1"></i>
                             </button>
                         </div>
@@ -49,21 +49,21 @@
                                 <th>Id</th>
                                 <th>
                                     <span class="mr-1"><i class="fa fa-book text-primary"></i></span>
-                                    Book
+                                    {{trans('common.book_label')}}
                                 </th>
                                 <th>
                                     <span class="mr-1"><i class="fa fa-user text-primary"></i></span>
-                                    Member
+                                    {{trans('common.member_label')}}
                                 </th>
                                 <th>
                                     <span class="mr-1"><i class="fa fa-calendar text-primary"></i></span>
-                                    Loan Date
+                                    {{trans('common.lend_date_label')}}
                                 </th>
                                 <th>
                                     <span class="mr-1"><i class="fa fa-calendar-check text-primary"></i></span>
-                                    Expected Date
+                                    {{trans('common.expected_return_label')}}
                                 </th>
-                                <th>Status</th>
+                                <th>{{trans('common.book_copy_status_label')}}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -80,7 +80,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{trans('common.confirm_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -94,7 +94,7 @@
                                 <i class="far fa-question-circle"></i>
                             </div>
                             <div class="pt-4 text-dark">
-                                Are you sure you want to remove this Loan:<br>
+                                {{trans('common.confirm_loan_delete_label')}}<br>
                                 <div class="d-inline text-teal font-weight-bold" id="confirm_loan"></div> ?
                             </div>
                         </div>
@@ -103,9 +103,9 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">
                             <i class="fa fa-trash mr-1"></i>
-                            Delete
+                            {{trans('common.yes_label')}}
                         </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('common.no_label')}}</button>
                     </div>
                 </form>
             </div>
@@ -116,7 +116,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="addModalLabel">Add Loan</h5>
+                    <h5 class="modal-title" id="addModalLabel">{{trans('common.lend_book_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -126,7 +126,7 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col">
-                                <label for="add_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
+                                <label for="add_member" class="text-dark font-weight-bold">{{trans('common.member_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -139,7 +139,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="add_book_item_id" class="text-dark font-weight-bold">Book<span class="text-danger">*</span></label>
+                                <label for="add_book_item_id" class="text-dark font-weight-bold">{{trans('common.book_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -152,7 +152,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="add_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
+                                <label for="add_loan_date" class="text-dark font-weight-bold">{{trans('common.lend_date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -166,10 +166,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">
-                            <i class="fa fa-save mr-1"></i>
-                            Save
+                            {{trans('common.save_label')}}
                         </button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <i class="fa fa-ban mr-1"></i>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -180,7 +182,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="editModalLabel">Edit Loan</h5>
+                    <h5 class="modal-title" id="editModalLabel">{{trans('common.edit_loan_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -191,7 +193,7 @@
                     <div class="modal-body">
                         <div class="form-row">
                             <div class="col">
-                                <label for="edit_member" class="text-dark font-weight-bold">Member<span class="text-danger">*</span></label>
+                                <label for="edit_member" class="text-dark font-weight-bold">{{trans('common.member_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -204,7 +206,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="edit_book_item_id" class="text-dark font-weight-bold">Book<span class="text-danger">*</span></label>
+                                <label for="edit_book_item_id" class="text-dark font-weight-bold">{{trans('common.book_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -217,7 +219,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="edit_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
+                                <label for="edit_loan_date" class="text-dark font-weight-bold">{{trans('common.lend_date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -232,9 +234,12 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-save mr-1"></i>
-                            Save
+                            {{trans('common.save_label')}}
                         </button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <i class="fa fa-ban mr-1"></i>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -245,7 +250,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-light">
-                    <h5 class="modal-title" id="processModalLabel">Return Book</h5>
+                    <h5 class="modal-title" id="processModalLabel">{{trans('common.return_book_label')}}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="text-light">&times;</span>
                     </button>
@@ -258,7 +263,7 @@
                     <div class="pt-2 px-3 pb-2">
                         <div class="form-row">
                             <div class="col">
-                                <label for="process_member_name" class="font-weight-bold text-dark">Member</label>
+                                <label for="process_member_name" class="font-weight-bold text-dark">{{trans('common.member_label')}}</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -270,7 +275,7 @@
                         </div>
                         <div class="form-row">
                             <div class="col">
-                                <label for="process_book_title" class="font-weight-bold text-dark">Book</label>
+                                <label for="process_book_title" class="font-weight-bold text-dark">{{trans('common.book_label')}}</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -283,7 +288,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="process_loan_date" class="text-dark font-weight-bold">Loan Date<span class="text-danger">*</span></label>
+                                <label for="process_loan_date" class="text-dark font-weight-bold">{{trans('common.lend_date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -296,7 +301,7 @@
                         </div>
                         <div class="form-row mt-3">
                             <div class="col">
-                                <label for="process_return_date" class="text-dark font-weight-bold">Return Date<span class="text-danger">*</span></label>
+                                <label for="process_return_date" class="text-dark font-weight-bold">{{trans('common.return_date_label')}}<span class="text-danger">*</span></label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text bg-white">
@@ -311,9 +316,12 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">
                             <span class="mr-1"><i class="fa fa-save"></i></span>
-                            Save
+                            {{trans('common.save_label')}}
                         </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                            <span class="mr-1"><i class="fa fa-save"></i></span>
+                            {{trans('common.cancel_label')}}
+                        </button>
                     </div>
                 </form>
             </div>
@@ -334,20 +342,21 @@
                         <div class="col">
                             <div class="font-weight-bold">
                                 <i class="fa fa-book mr-1 text-primary"></i>
-                                Book
+                                <span class="text-dark">{{trans('common.book_label')}}</span>
                             </div>
                             <div class="text-wrap" id="detail_title"></div>
                         </div>
                         <div class="col">
                             <div class="font-weight-bold">
-                                <i class="fa fa-user text-primary mr-1"></i>Member
+                                <i class="fa fa-user text-primary mr-1"></i>
+                                <span class="text-dark">{{trans('common.member_label')}}</span>
                             </div>
                             <span class="" id="detail_member"></span>
                         </div>
                         <div class="col">
                             <div class="font-weight-bold">
                                 <i class="fa fa-cog text-primary mr-1"></i>
-                                Status
+                                <span class="text-dark">{{trans('common.book_copy_status_label')}}</span>
                             </div>
                             <span class="" id="detail_status"></span>
                         </div>
@@ -355,15 +364,15 @@
                     <div class="row p-2 mt-2">
                         <div class="col">
                             <div class="font-weight-bold">
-                                <i class="fa fa-calendar mr-1"></i>
-                                Loan date
+                                <i class="fa fa-calendar text-primary mr-1"></i>
+                                <span class="text-dark">{{trans('common.lend_date_label')}}</span>
                             </div>
                             <span id="detail_loan_date"></span>
                         </div>
                         <div class="col">
                             <div class="font-weight-bold">
-                                <i class="fa fa-stopwatch mr-1"></i>
-                                Expected Date
+                                <i class="fa fa-stopwatch text-primary mr-1"></i>
+                                <span class="text-dark">{{trans('common.expected_return_label')}}</span>
                             </div>
                             <span class="" id="detail_expected_date">
 
@@ -371,15 +380,17 @@
                         </div>
                         <div class="col">
                             <div class="font-weight-bold">
-                                <i class="fa fa-calendar-check mr-1"></i>
-                                Return Date
+                                <i class="fa fa-calendar-check text-primary mr-1"></i>
+                                <span class="text-dark">{{trans('common.loan_return_date_label')}}</span>
                             </div>
                             <span class="" id="detail_return_date"></span>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        {{trans('common.close_label')}}
+                    </button>
                 </div>
             </div>
         </div>
@@ -444,7 +455,7 @@
                             const {message} = xhr.responseJSON
                             removeModal.modal('hide')
                             dataTable.ajax.reload()
-                            toastr.warning(message,'Success')
+                            toastr.warning(message,'{{trans('common.success_label')}}')
                         }
                     }
 
@@ -481,13 +492,13 @@
                         if(xhr.status === 201){
                             const {message} = xhr.responseJSON
                             addModal.modal('hide')
-                            toastr.success(message,'Success')
+                            toastr.success(message,'{{trans('common.success_label')}}')
                             dataTable.ajax.reload()
                         }
                         if(xhr.status === 401){
                             const {message} = xhr.responseJSON
                             addModal.modal('hide')
-                            toastr.error(message,'Error!')
+                            toastr.error(message,'{{trans('common.error_label')}}!')
                         }
                     }
                 })
@@ -523,13 +534,13 @@
                         if(xhr.status === 201){
                             const {message} = xhr.responseJSON
                             editModal.modal('hide')
-                            toastr.success(message,'Success')
+                            toastr.success(message,'{{trans('common.success_label')}}')
                             dataTable.ajax.reload()
                         }
                         if(xhr.status === 401){
                             const {message} = xhr.responseJSON
                             editModal.modal('hide')
-                            toastr.error(message,'Error!')
+                            toastr.error(message,'{{trans('common.error_label')}}!')
                         }
                     }
                 })
@@ -542,7 +553,7 @@
                 const complete = (xhr)=>{
                     if(xhr.status === 201){
                         const {message} = xhr.responseJSON
-                        toastr.info(message,'Success')
+                        toastr.info(message,'{{trans('common.success_label')}}')
                         processModal.modal('hide')
                         dataTable.ajax.reload()
                     }

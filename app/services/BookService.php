@@ -17,7 +17,17 @@ class BookService
 
     public function getBooks(array $filterOptions = null){
         $books = DB::table('book_info')->select('id','title','author','isbn','cover','num_copies', 'num_pages');
-        return $books->get();
+        if (isset($filterOptions['categoryId']) && $filterOptions['categoryId'] != 0){
+            $categoryId = $filterOptions['categoryId'];
+            $booksWithCategory = DB::table('book_categories')->where('category_id','=',$categoryId)
+                                ->select('book_id')->get()->toArray();
+            $items = array();
+            foreach ($booksWithCategory as $element){
+                array_push($items, $element->book_id);
+            }
+            $books = $books->whereIn('id',$items);
+        }
+        return $books;
     }
 
     public function storeBook(array $data, Request $request){

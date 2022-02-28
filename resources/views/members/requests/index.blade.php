@@ -310,56 +310,56 @@
                     <div class="row">
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">{{trans('common.name_label')}}:</div>
-                                <span class="" id="d_name">Deyon Rudge</span>
+                                <div class="font-weight-bold text-dark">{{trans('common.name_label')}}:</div>
+                                <span class="" id="d_name"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">{{trans('common.gender_label')}}:</div>
-                                <span class="" id="d_gender">male</span>
+                                <div class="font-weight-bold text-dark">{{trans('common.gender_label')}}:</div>
+                                <span class="" id="d_gender"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">
+                                <div class="font-weight-bold text-dark">
                                     <span class="mr-1"><i class="fa fa-calendar text-primary"></i></span>
                                     {{trans('common.birth_date')}}:
                                 </div>
-                                <span class="" id="d_birth_date">Jan 1st 2000</span>
+                                <span class="" id="d_birth_date"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">
+                                <div class="font-weight-bold text-dark">
                                     <span class="mr-1"><i class="fa fa-envelope text-primary"></i></span>
                                     {{trans('common.email_label')}}:
                                 </div>
-                                <span class="" id="d_email">deyon@gmail.com</span>
+                                <span class="" id="d_email"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">
+                                <div class="font-weight-bold text-dark">
                                     <span class="mr-1"><i class="fa fa-phone text-primary"></i></span>
                                     {{trans('common.phone_number_label')}}:
                                 </div>
-                                <span class="" id="d_phone_number">(+597) 998833</span>
+                                <span class="" id="d_phone_number"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">
+                                <div class="font-weight-bold text-dark">
                                     <span class="mr-1"><i class="fa fa-location-arrow text-primary"></i></span>
                                     {{trans('common.address_label')}}:
                                 </div>
-                                <span class="" id="d_address">Street name #19</span>
+                                <span class="" id="d_address"></span>
                             </div>
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">{{trans('common.request_date_label')}}:</div>
-                                <span class="" id="d_requested_on">Jan 1st 2021</span>
+                                <div class="font-weight-bold text-dark">{{trans('common.request_date_label')}}:</div>
+                                <span class="" id="d_requested_on"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">{{trans('common.membership_types_label')}}:</div>
-                                <span class="" id="d_package">Single package</span>
+                                <div class="font-weight-bold text-dark">{{trans('common.membership_types_label')}}:</div>
+                                <span class="" id="d_package"></span>
                             </div>
                             <div class="mb-2">
-                                <div class="font-weight-bold text-secondary">{{trans('common.book_copy_status_label')}}:</div>
-                                <span class="" id="d_status">pending</span>
+                                <div class="font-weight-bold text-dark">{{trans('common.book_copy_status_label')}}:</div>
+                                <span class="" id="d_status"></span>
                             </div>
                         </div>
                     </div>
@@ -750,6 +750,7 @@
                         $('#d_email').html(`${request.email}`)
                         $('#d_address').html(`${request.address}`)
                         $('#d_phone_number').html(`${request.phone_number}`)
+                        $('#d_gender').html(request.gender)
                         if(request.member_picture !== null){
                             $('#d_image').attr('src',request.member_picture)
                         }

@@ -11,6 +11,7 @@ use App\Http\Controllers\MembershipRequestsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PricingController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Auth\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::post('/login',[AuthController::class, 'authenticate'])->name('authenticate');

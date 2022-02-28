@@ -111,7 +111,7 @@ return [
     'application_delete_confirm_label' => 'Bent u zeker dat u deze aanvraag wilt verwijderen:',
     'application_info_labels' => "Aanvraag informatie",
     'application_process_label' => 'Process Application',
-    'loans_label' => 'Loans',
+    'loans_label' => 'Uitgeleende boeken',
     'period_label' => 'Periode',
     'loan_date_label' => 'Loan date',
     'loan_return_date_label' => 'Return date',
@@ -164,5 +164,13 @@ return [
     'new_payment_label' => 'Nieuwe betaling',
     'edit_payment_label' => 'Betaling aanpassen',
     'confirm_payment_delete_label' => 'Bent u zeker dan u de betaling wilt verwijderen:',
+
+    'lend_book_label' => 'Boek uitlenen',
+    'return_book_label' => 'Boek retouren',
+    'lend_date_label' => 'Uitleen datum',
+    'expected_return_label' => 'Verwachte datum',
+
+    'edit_loan_label' => 'Uitgeleend boek aanpassen',
+    'lend_label' => 'Lenen'
 
 ];
